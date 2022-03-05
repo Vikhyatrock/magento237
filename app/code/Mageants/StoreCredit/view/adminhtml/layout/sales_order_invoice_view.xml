@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>    
+		<referenceBlock name="invoice_totals">
+            <action method="setTemplate" ifconfig="store_credit/general/enable">
+                <argument name="template" translate="true" xsi:type="string">Mageants_StoreCredit::order/view/storecredit_total.phtml</argument>
+            </action>
+        </referenceBlock>
+		<referenceBlock name="invoice_totals">
+            <block class="Mageants\StoreCredit\Block\Adminhtml\Order\Invoice\Storecreditinvoiceview" name="storecreditamount" after="-" template="Mageants_StoreCredit::order/view/storecreditamount.phtml" />
+        </referenceBlock>
+    </body>
+</page>

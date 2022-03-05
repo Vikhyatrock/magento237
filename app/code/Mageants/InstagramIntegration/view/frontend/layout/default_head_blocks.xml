@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <css src="Mageants_InstagramIntegration::css/instagram-integration.css"/>
+        <css src="Mageants_InstagramIntegration::css/font-awesome.min.css"/>
+    </head>
+</page>

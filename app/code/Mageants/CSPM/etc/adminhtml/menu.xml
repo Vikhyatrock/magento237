@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mageants_CSPM::cspm_content" title="CSPM" module="Mageants_CSPM" sortOrder="50" resource="Mageants_CSPM::cspm_content" parent="Magento_Customer::customer" />		
+		<add id="Mageants_CSPM::conf_cspm" title="CSPM Configuration" module="Mageants_CSPM" sortOrder="50" parent="Mageants_CSPM::cspm_content" action="cspm/cspm" resource="Mageants_CSPM::conf_cspm"/>  	   
+    </menu>
+</config>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mageants_preorder>
+        	<general>
+                <active>1</active>
+                <change_status>1</change_status>
+                <allowe_outofproduct_for_preorder>1</allowe_outofproduct_for_preorder>
+                <restrict_order>1</restrict_order>
+            </general>
+            <display_options>
+                <add_to_cart_button_text>Pre-Order</add_to_cart_button_text>
+                <default_message_for_preorder>This is Pre order product.</default_message_for_preorder>
+                <note_for_preorder_incart>This order content pre-order product.</note_for_preorder_incart>
+            </display_options>
+        </mageants_preorder>
+    </default>
+</config>

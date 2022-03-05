@@ -1,0 +1,14 @@
+<?php
+    $currentDomain = preg_replace('/www\./i', '', $_SERVER['SERVER_NAME']);
+?>
+<script type="text/javascript">    
+require(["jquery","jquery/jquery.cookie"], function($) {
+    jQuery(document).ready(function($) {    
+        jQuery.cookie("shippingExtrafeeIds",'',{ path: '/',domain : '<?php echo ".".$currentDomain; ?>'});
+        jQuery.cookie("shippingExtraFeeLabel",'',{ path: '/',domain : '<?php echo ".".$currentDomain; ?>'});
+        jQuery.cookie("orderExtraFeeLabel",'',{ path: '/',domain : '<?php echo ".".$currentDomain; ?>'});
+        jQuery.cookie("orderExtrafeeAmount",'',{ path: '/',domain : '<?php echo ".".$currentDomain; ?>'});
+        jQuery.cookie("orderExtrafeeId",'',{ path: '/',domain : '<?php echo ".".$currentDomain; ?>'});
+    });
+});
+</script>

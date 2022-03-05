@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageants" translate="label" sortOrder="100">
+            <label>Mageants</label>
+        </tab>
+        <section id="store_credit" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Store Credit</label>
+            <tab>mageants</tab>
+            <resource>Mageants_StoreCredit::storecredit_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="refund_auto" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Refund Store Credit Automatically</label>
+					<comment>Refund to Store Credit option will be selected by default on the credit memo page.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="apply_on_tax" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Allow applying Store Credit on Tax</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="apply_on_shipping" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Allow applying Store Credit on Shipping</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+			<group id="email_notification" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Email Notification</label>
+                <field id="email_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Store Credit Balance Update Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="email_actions" translate="label" type="multiselect" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Send Email Actions</label>
+                    <source_model>Mageants\StoreCredit\Model\Config\Emailaction</source_model>
+                </field>
+				<field id="credit_send_email" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Store Credit Update Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+				<field id="customer_notification_template" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="1" canRestore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

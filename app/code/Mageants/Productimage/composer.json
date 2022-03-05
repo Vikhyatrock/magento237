@@ -1,0 +1,21 @@
+{
+  "name": "mageants/module-productimage",
+  "description": "Magento 2 Images of product By Customer",
+  "type": "magento2-module",
+  "version": "2.0.1",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "require": {
+    "php": "~7.0.13||~7.1.0||~7.2.0||~7.3.0||~7.4.0"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Mageants\\Productimage\\": ""
+    }
+  }
+}

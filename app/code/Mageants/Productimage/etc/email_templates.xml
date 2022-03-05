@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants Productimage
+ * @package Mageants_Productimage
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="productimage_email_emailtemplate" label="Customer Product Images" file="emailtemplate.html" type="html" module="Mageants_Productimage" area="frontend"/>
+    <template id="productimage_email_approve_email_template" label="Product Image Approve Template" file="productimage_approve.html" type="html" module="Mageants_Productimage" area="frontend"/>
+    <template id="productimage_email_reject_email_template" label="Product Image Reject Template" file="productimage_reject.html" type="html" module="Mageants_Productimage" area="frontend"/>
+</config>

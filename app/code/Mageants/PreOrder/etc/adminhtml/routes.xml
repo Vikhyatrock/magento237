@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category Mageants PreOrder
+ * @package Mageants_PreOrder
+ * @copyright Copyright (c) 2018  Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="preorder" frontName="preorder">
+            <module name="Mageants_PreOrder" />
+        </route>
+    </router>
+</config>

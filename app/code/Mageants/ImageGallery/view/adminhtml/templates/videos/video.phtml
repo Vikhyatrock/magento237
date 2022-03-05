@@ -1,0 +1,57 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$request = $objectManager->get('Magento\Framework\App\Request\Http');
+$id = $request->getParam('id');
+
+$formData = $this->helper('Mageants\ImageGallery\Helper\Data')->getVideoFormData($id);
+ 
+$videoUrl = '';
+$inputValue = '';
+if (!empty($formData)) {
+    $videoUrl = $formData['videourl'];
+    $inputValue = $formData['value'];
+}
+
+?>
+
+<div class="admin__field field field-video  with-addon required _required with-note" data-ui-id="imagegallery-video-edit-tab-videogallery-fieldset-element-form-field-video">
+    <label class="label admin__field-label" for="page_video" data-ui-id="imagegallery-video-edit-tab-videogallery-fieldset-element-file-video-label">
+        <span><?= __("Video"); ?></span>
+    </label>
+            <div class="admin__field-control control">
+                <div class="admin__field"> 
+                    <input id="page_video" name="video" data-ui-id="imagegallery-video-edit-tab-videogallery-fieldset-element-file-video" value="<?= $inputValue ?>" class="input-file <?php if (empty($inputValue)) { echo 'required-entry required-file'; }?>" title="Video" type="file" aria-required="true">
+                    <label class="addafter" for="page_video"></label>
+                </div>                
+
+                <div class="note admin__field-note" id="video-note">    <?= __("Allow video type: mp4, avi, webm, flv, wmv, 3gp, ogg");?>
+                </div>
+                <?php if (!empty($videoUrl)): ?>   
+                    <div>
+                        <span class="delete-video">
+                            <input type="checkbox" name="video[delete]" value="<?= $id; ?>" class="checkbox" id="page_video_delete" aria-required="true">
+                            <label for="page_video_delete"><?= __("Delete Video"); ?></label>
+                            <input type="hidden" name="video[value]" value="<?= $inputValue; ?>" aria-required="true">
+                        </span>
+                        <video width="800" height="200" controls>
+                            <source src="<?= $videoUrl; ?>" type="video/mp4">
+                            <source src="mov_bbb.ogg" type="video/ogg">
+                               <?= __("Your browser does not support HTML5 video.");?>
+                        </video>  
+                    </div>
+                <?php endif; ?>       
+            </div>
+</div>
+<script type="text/javascript">
+    require(['jquery'],function($){
+
+        $(document).ready(function(){
+
+            $(".field-video").insertAfter( $( ".field-is_active" ) );
+
+        });
+
+    });
+</script>
+    

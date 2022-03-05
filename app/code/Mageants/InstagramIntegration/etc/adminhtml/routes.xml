@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+ <!-- 
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="instagramintegrationadmin" frontName="instagramintegrationadmin">
+            <module name="Mageants_InstagramIntegration"/>
+        </route>
+    </router>
+</config>
+
+

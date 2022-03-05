@@ -1,0 +1,41 @@
+.mageants-checkbox-undo, .mageants-checkbox-del, .mageants-checkbox-null {
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    z-index: 2;
+}
+.mageants-checkbox-undo:hover:before {
+    content: '\e634';
+    font-family: 'Admin Icons';
+    font-size: 3rem;
+    cursor: pointer;
+}
+.mageants-checkbox-del:hover:before {
+    content: '\e632';
+    font-family: 'Admin Icons';
+    font-size: 3rem;
+    cursor: pointer;
+}
+.mageants-checkbox-undo img, .mageants-checkbox-null img, .mageants-checkbox-del:hover img {
+    display: none;
+}
+.mageants-upload-button {
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    left: 37px;
+    z-index: 2;
+    cursor: pointer;
+}
+.mageants-upload-button::before {
+    content: '\e635';
+    font-family: 'Admin Icons';
+    font-size: 3rem;
+}
+.mageants-upload-field input {
+    display: none;
+}
+.mageants-upload-field {
+    width: 70px;
+    position: absolute;
+}

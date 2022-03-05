@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants DeleteAccount
+ * @package Mageants_DeleteAccount
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="2columns-left" >
+	<head>
+    	<title>Delete Account</title>
+  		 <css src="Mageants_Deleteaccount::css/custom.css"/>
+    </head>
+    <update handle="customer_account"/> 
+	<body> 
+	     <referenceContainer name="content"> 
+	        <block class="Magento\Framework\View\Element\Template" name="delete-confirm" template="Mageants_Deleteaccount::deleteconfirm.phtml"> 
+	        </block> 
+	    </referenceContainer> 
+	</body> 
+</page>

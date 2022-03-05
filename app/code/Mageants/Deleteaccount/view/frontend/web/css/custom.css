@@ -1,0 +1,16 @@
+.button-alignment{
+	text-align: left;
+	padding: 20px;	
+}
+.customerr{
+	color:red;
+}
+.deletenotice{
+	display: -webkit-inline-flex;
+}
+.column.main{
+  margin-top: 50px;
+}
+.deleteaccount-index-deleteconfirm div.page-title-wrapper h1.page-title{
+	display: none;
+}

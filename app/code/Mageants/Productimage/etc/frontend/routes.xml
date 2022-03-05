@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants Productimage
+ * @package Mageants_Productimage
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="productimage" frontName="product_image_customer">
+            <module name="Mageants_Productimage" />
+        </route>
+    </router>
+</config>

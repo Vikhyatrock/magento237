@@ -1,0 +1,114 @@
+<?php
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+
+$media=$block->getInstaMedia()->getData();
+?>
+<p class="message message-success" style="display: none; margin: 0 0 2rem;" data-message></p>
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width:50%;">
+                    <h3 class="icon-head head-products"><?= /* @noEscape */  __("New Instagram Images"); ?>
+                    </h3>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+<?php if (!empty($media)) { ?>
+        <?php foreach ($media as $data) : ?>
+            <div class="item" id="<?= /* @noEscape */ $data['insta_media_id']; ?>" 
+                style="width:150px;margin:10px; text-align:center; float:left;">
+                <?=/* @noEscape */ "<p>".$data['update_by']."</p>";?>
+
+                    <?php if ($data['insta_type']=='IMAGE' || $data['insta_type']=='CAROUSEL_ALBUM') { ?>
+                        <img src="<?= /* @noEscape */ $data['insta_media_thumbnail']; ?>">
+                    <?php } else { ?>
+                        <video width="150" height="150" controls="">
+                            <source src="<?= /* @noEscape */  $data['insta_media_thumbnail']; ?>" type="video/mp4">
+                            <?= /* @noEscape */  __("Your browser does not support the video tag."); ?>
+                        </video>
+
+                    <?php } ?>
+                     <br>
+                <a style="float:left;" onclick="return approveMedia('<?php /* @noEscape */ echo  $data['insta_media_id']; ?>', '<?php echo $data['store_id']; ?>');" href="javascript:void(0);"><?= /* @noEscape */ __("Approve");  ?>
+                </a>
+
+                <a style="float:right;" onclick="return deleteMedia('<?php /* @noEscape */ echo $data['insta_media_id']; ?>', '<?php echo $data['store_id']; ?>');" href="javascript:void(0);"><?= /* @noEscape */ __("Delete"); ?>
+                </a>
+
+            </div>
+        <?php endforeach; ?>
+<?php } else { ?>
+    <div>   
+
+        <span><?= /* @noEscape */ __("Here None of New Media Found, please upload media in instagram and then update list."); ?></span>
+
+    </div>
+<?php } ?>
+</div>
+<script type="text/javascript" >
+
+function approveMedia(mediaId, storeId) {  
+
+    var approveurl = "<?= /* @noEscape */ $block->getUrl('instagramintegrationadmin/instamedia/approve'); ?>"
+    var status=1;
+
+    jQuery.ajax({
+        showLoader: true,
+        url:approveurl,
+        data:{
+            mediaid:mediaId,
+            storeid:storeId,
+            status:status
+        },
+        type: 'POST',
+        success: function(result){
+
+            if(result){
+
+                jQuery("#"+mediaId).remove();
+                var message = result;
+                jQuery("p.message").css("display", "block");
+                jQuery('[data-message]').html(message);
+
+            }
+        }
+    });
+}
+
+function deleteMedia(mediaId, storeId){
+
+    var deleteurl = "<?= /* @noEscape */ $block->getUrl('instagramintegrationadmin/instamedia/delete'); ?>"
+    var status=0;
+
+    jQuery.ajax({
+        showLoader: true,
+        url:deleteurl,
+        data:{
+        mediaid:mediaId,
+        storeid:storeId,
+        status:status
+        },
+        type: 'POST',
+        success: function(result){
+
+            if(result){
+
+                jQuery("#"+mediaId).remove();
+                var message = result;
+                jQuery("p.message").css("display", "block");
+                jQuery('[data-message]').html(message); 
+
+            }
+        }
+    });
+}
+</script>

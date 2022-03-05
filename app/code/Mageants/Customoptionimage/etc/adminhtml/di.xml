@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="custom-options" xsi:type="array">
+                    <item name="class" xsi:type="string">Mageants\Customoptionimage\Ui\DataProvider\Product\Form\Modifier\MageantsCustomOptions</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Options" type="Mageants\Customoptionimage\Block\Adminhtml\ProductOptions\Options" />
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Options\Option" type="Mageants\CustomOptionAbsolutePriceQuantity\Block\Adminhtml\ProductOptions\Option" />
+</config>

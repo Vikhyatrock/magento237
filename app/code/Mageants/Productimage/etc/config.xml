@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants Productimage
+ * @package Mageants_Productimage
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+	    <productimage>
+	     	<general>
+	     		<enable>1</enable>
+	     		<allowguest>1</allowguest>
+	     		<emailrequired>1</emailrequired>
+	         	<frontendtabtitle>Customer Images</frontendtabtitle>
+	     	</general>
+	     	<display>
+	     		<navoptions>1</navoptions>
+	     		<slidespeed>2000</slidespeed>
+	     		<imageonslide>8</imageonslide>
+	     		<imageuploadlimit>3</imageuploadlimit>
+	     		<himagedimenstion>135</himagedimenstion>
+	     		<vimagedimenstion>175</vimagedimenstion>
+	     		<himagezoom>1200</himagezoom>
+	     		<vimagezoom>900</vimagezoom>
+	     	</display>
+	     	<email>
+	     		<emailenable>0</emailenable>
+	     		<identity>1</identity>
+	     		<emailreceiver>testmagento@gmail.com</emailreceiver>
+	     		<approve_email_template>productimage_email_approve_email_template</approve_email_template>
+	     		<reject_email_template>productimage_email_reject_email_template</reject_email_template>
+	     	</email>
+	    </productimage>
+	</default>
+</config>

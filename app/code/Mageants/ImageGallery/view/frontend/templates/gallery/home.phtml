@@ -1,0 +1,105 @@
+<?php
+/**
+ * @category Mageants ImageGallery
+ * @package Mageants_ImageGallery
+ * @copyright Copyright (c) 2017 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+
+$helper=$this->helper('Mageants\ImageGallery\Helper\Data');
+
+if ($helper->IsEnabled()) {
+    ?>
+<div class="page-title"><span><h3 style="background-color: <?=$helper->getHeaderBgColor();?>; color:<?=$helper->getHeaderForeColor();?>;"><?php echo __($helper->getHeaderTitle()); ?></h3></span></div>
+<div class="gallery-action">
+<a id="back" style="display:none"><?php echo __("Back")?></a>
+<a class="images_gallery_button" style="display:none"><?php echo __("Images")?></a>
+<a class="videos_gallery_button" style="display:none;"><?php echo __("Videos")?></a>
+</div>
+<div id="images_gallery"></div>
+<div id="gallery_image">
+    <?php $url = '' ?>
+    <?php $collection=$helper->getCategories();
+    
+    if (sizeof($collection) > 0) {
+        foreach ($collection as $category) {
+            $categoryid=$category['category_id'];
+            $url = preg_replace('#[^0-9a-z]+#i', '-', $category['url_key']);
+            $url = $this->getBaseUrl()."imagegallery/".$url.".html";
+
+            ?>
+            <div class="uniq">
+                <a id="<?php echo $category['category_id']; ?>" href="<?=$url?>">    
+                    <img id="image_id" src='<?php echo $helper->getCategoryImageUrl($categoryid); ?>' title="<?php echo $category['category_name']; ?>" alt='' width="300" />
+                </a>
+                <input type="hidden" class="category_url" value="<?=$url?>" />
+                <h2 style="background:<?=$helper->getImageTitleBgColor();?>;"><a style="color:<?=$helper->getImageTitleForeColor();?>;" id="<?php echo $category['category_id']; ?>" href="<?=$url?>">    <?php echo $category['category_name']; ?></a>
+                    <input type="hidden" class="category_url" value="<?=$url?>" />
+                </h2>
+            </div>
+            <?php
+        }
+    } else {
+        echo 'No Image Category Found';
+    }?>
+</div>
+<div class="loader"></div>
+<div id="myModal" class="modal" style="display:none">
+    <img class="modal-content zoomIn animated" id="imagegallery">    
+</div>    
+<script type="text/javascript">
+    require(['jquery'],function($){
+        $(document).ready(function(){
+            var imageUrl="<?php echo $block->getViewFileUrl('Mageants_ImageGallery::images/hour.gif'); ?>";
+            $('.loader').css({'background':'url(' + imageUrl + ') 50% 50% no-repeat rgb(249,249,249)','display':'none'});
+            $('#back').click(function() {
+                $('.page-title span h3').text("<?php echo __("Image Gallery"); ?>");
+                $('#images_gallery').html('');
+                $('#gallery_image').removeClass('displayval');
+                $(this).css("display","none");
+                $('.images_gallery_button').css("display","none");
+                $('.videos_gallery_button').css("display","none");
+                $url = '<?php echo $this->getBaseUrl()."imagegallery/"; ?>';
+                window.location.href = $url;
+            });
+
+            $('.images_gallery_button').click(function() {
+                var id = $(this).attr('id');
+                $('.loader').css("display","block");
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo $this->getUrl('imagegallery/index/index'); ?>',
+                    data: { categoryid: id},
+                    success: function(response) {
+                        $('#images_gallery').html(response);
+                    },
+                    complete: function(){
+                        $('.loader').css("display","none");
+                    }
+                });
+            });
+
+            $('.videos_gallery_button').click(function() {
+                var id = $(this).attr('id');
+                $('.loader').css("display","block");
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo $this->getUrl('imagegallery/index/videos'); ?>',
+                    data: { categoryid: id},
+                    success: function(response) {
+                        $('#images_gallery').html(response);
+                    },
+                    complete: function(){
+                        $('.loader').css("display","none");
+                    }
+                });
+            });        
+        });
+        
+        
+    });
+</script>    
+<?php } else {
+    echo '<h2>'.__('Please Enabled ImageGallery Module First....... :-)').'</h2>';
+}
+?>

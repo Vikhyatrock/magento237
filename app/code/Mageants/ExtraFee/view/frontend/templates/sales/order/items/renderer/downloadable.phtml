@@ -1,0 +1,266 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Downloadable\Block\Sales\Order\Item\Renderer\Downloadable */
+?>
+<?php
+$_item = $block->getItem();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data');
+$model = $objectManager->create('Mageants\ExtraFee\Model\ExtraFee');
+$productRepository = $objectManager->create('Magento\Catalog\Model\ProductRepository');
+?>
+<tr id="order-item-row-<?= /* @escapeNotVerified */ $_item->getId() ?>">
+    <td class="col name" data-th="<?= $block->escapeHtml(__('Product Name')) ?>">
+        <strong class="product name product-item-name"><?= $block->escapeHtml($_item->getName()) ?></strong>
+        <?php if ($_options = $block->getItemOptions()): ?>
+            <dl class="item-options links">
+                <?php foreach ($_options as $_option): ?>
+                    <dt><?= $block->escapeHtml($_option['label']) ?></dt>
+                    <?php if (!$block->getPrintStatus()): ?>
+                        <?php $_formatedOptionValue = $block->getFormatedOptionValue($_option) ?>
+                        <dd<?php if (isset($_formatedOptionValue['full_view'])): ?> class="tooltip wrapper"<?php endif; ?>>
+                            <?= /* @escapeNotVerified */ $_formatedOptionValue['value'] ?>
+                            <?php if (isset($_formatedOptionValue['full_view'])): ?>
+                                <div class="tooltip content">
+                                    <dl class="item options">
+                                        <dt><?= $block->escapeHtml($_option['label']) ?></dt>
+                                        <dd><?= /* @escapeNotVerified */ $_formatedOptionValue['full_view'] ?></dd>
+                                    </dl>
+                                </div>
+                            <?php endif; ?>
+                        </dd>
+                    <?php else: ?>
+                        <dd>
+                            <?= nl2br($block->escapeHtml((isset($_option['print_value']) ? $_option['print_value'] : $_option['value']))) ?>
+                        </dd>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </dl>
+        <?php endif; ?>
+        <?php
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $fullAction=$objectManager->get("\Magento\Framework\App\Request\Http")->getFullActionName();
+        if ($fullAction=='sales_order_invoice' || $fullAction=='sales_order_view') {
+            if ($fullAction=='sales_order_invoice') {
+                $feesIds= [];
+                $options=$_item->getOrderItem()->getProductOptions();
+                if (array_key_exists("feesname", $options['info_buyRequest'])) {
+                    $feesIds=$options['info_buyRequest']['feesname'];
+                }
+                if (!(sizeof($feesIds)>0)) {
+                    $productId = $_item->getProductId();
+                    $product=$productRepository->getById($productId);
+                    $overrideCat=$product->getOverrideCat();
+                    if ($overrideCat=="Yes") {
+                        $ExtraFeeList=$product->getExtrafeelist();
+                        $feeIds=explode(",", $ExtraFeeList);
+                        $ExtraFeeCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', [
+                                    ['finset'=> 'Product']
+                                ])
+                            ->addFieldToFilter('id', ['in' => $feeIds]);
+                         $feesIds=$ExtraFeeCollection->getData();
+                    } elseif ($overrideCat=="No") {
+                        $ExtraFeeCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', [
+                                    ['finset'=> 'Category']
+                                ]);
+
+                         $feesIds=$ExtraFeeCollection->getData();
+                    } else {
+                        $ExtraFeeList=$product->getExtrafeelist();
+                        $feeIds=explode(",", $ExtraFeeList);
+                        $categoryId=$product->getCategoryIds();
+                        $ExtraFeeCatIdCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToSelect('category_ids')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', 'Category');
+                        $ExtraFeeCatCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', 'Category');
+                        $ExtraFeePrdCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', 'Product')
+                            ->addFieldToFilter('id', ['in' => $feeIds]);
+
+                        $ExtraCatFee=[];
+                        $ExtraPrdFee=[];
+                        
+                        if (sizeof($ExtraFeeCatCollection) > 0) {
+                            $data = $ExtraFeeCatIdCollection->getData();
+                            $result = [];
+                            foreach ($data as $datas) {
+                                $feeCatId = explode(",", $datas['category_ids']);
+                                $result=array_intersect($feeCatId, $categoryId);
+                                
+                                if (sizeof($result) > 0) {
+                                    $ExtraCatFee=$ExtraFeeCatCollection->getData();
+                                }
+                            }
+                        }
+                        if (sizeof($ExtraFeePrdCollection) > 0) {
+                            $ExtraPrdFee=$ExtraFeePrdCollection->getData();
+                        }
+                         $feesIds=array_merge($ExtraCatFee, $ExtraPrdFee);
+                    }
+                }
+            } elseif ($fullAction=='sales_order_view') {
+                $feesIds=$_item->getBuyRequest()->getFeesname();
+                if (empty($feesIds)) {
+                    $productId = $_item->getProductId();
+                    $product=$productRepository->getById($productId);
+                    $overrideCat=$product->getOverrideCat();
+                    if ($overrideCat=="Yes") {
+                        $ExtraFeeList=$product->getExtrafeelist();
+                        $feeIds=explode(",", $ExtraFeeList);
+                        $ExtraFeeCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', [
+                                    ['finset'=> 'Product']
+                                ])
+                            ->addFieldToFilter('id', ['in' => $feeIds]);
+                         $feesIds=$ExtraFeeCollection->getData();
+                    } elseif ($overrideCat=="No") {
+                        $ExtraFeeCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', [
+                                    ['finset'=> 'Category']
+                                ]);
+
+                         $feesIds=$ExtraFeeCollection->getData();
+                    } else {
+                        $ExtraFeeList=$product->getExtrafeelist();
+                        $feeIds=explode(",", $ExtraFeeList);
+                        $categoryId=$product->getCategoryIds();
+                        $ExtraFeeCatIdCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToSelect('category_ids')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', 'Category');
+                        $ExtraFeeCatCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', 'Category');
+                        $ExtraFeePrdCollection=$model->getCollection()
+                            ->addFieldToSelect('id')
+                            ->addFieldToFilter('estatus', 'Enabled')
+                            ->addFieldToFilter('is_mandatory', 'Yes')
+                            ->addFieldToFilter('apply_to', 'Product')
+                            ->addFieldToFilter('id', ['in' => $feeIds]);
+
+                        $ExtraCatFee=[];
+                        $ExtraPrdFee=[];
+                        
+                        if (sizeof($ExtraFeeCatCollection) > 0) {
+                            $data = $ExtraFeeCatIdCollection->getData();
+                            $result = [];
+                            foreach ($data as $datas) {
+                                $feeCatId = explode(",", $datas['category_ids']);
+                                $result=array_intersect($feeCatId, $categoryId);
+                                
+                                if (sizeof($result) > 0) {
+                                    $ExtraCatFee=$ExtraFeeCatCollection->getData();
+                                }
+                            }
+                        }
+                        if (sizeof($ExtraFeePrdCollection) > 0) {
+                            $ExtraPrdFee=$ExtraFeePrdCollection->getData();
+                        }
+                         $feesIds=array_merge($ExtraCatFee, $ExtraPrdFee);
+                    }
+                }
+            }
+            if (sizeof($feesIds)>0) { ?>
+            <dl class="item-options">
+                <?php foreach ($feesIds as $data) {
+                        $ExtraFeeData=$model->load($data)->getData(); ?>
+                    <dt><?= __($ExtraFeeData['feesname']); ?></dt>
+                    <dd><?php if ($ExtraFeeData['type']=='Percentage') {
+                        $amount=($price*$ExtraFeeData['amount'])/100;
+                        echo $priceHelper->currency($amount, true, false);
+                        } else {echo $priceHelper->currency($ExtraFeeData['amount'], true, false);} ?> </dd>
+                    
+            <?php }  ?>
+            </dl> 
+        <?php }
+            $addtInfoBlock = $block->getProductAdditionalInformationBlock();
+            if ($addtInfoBlock) {
+                echo $addtInfoBlock->setItem($_item)->toHtml();
+            }
+            echo $block->escapeHtml($_item->getDescription());
+        }
+        ?>
+        <?php /* downloadable */ ?>
+        <?php if ($links = $block->getLinks()): ?>
+            <dl class="item-options links">
+                <dt><?= $block->escapeHtml($block->getLinksTitle()) ?></dt>
+                <?php foreach ($links->getPurchasedItems() as $link): ?>
+                    <dd><?= $block->escapeHtml($link->getLinkTitle()) ?></dd>
+                <?php endforeach; ?>
+            </dl>
+        <?php endif; ?>
+        <?php /* EOF downloadable */ ?>
+        <?php $addtInfoBlock = $block->getProductAdditionalInformationBlock(); ?>
+        <?php if ($addtInfoBlock):?>
+            <?= $addtInfoBlock->setItem($_item)->toHtml() ?>
+        <?php endif; ?>
+        <?= $block->escapeHtml($_item->getDescription()) ?>
+    </td>
+    <td class="col sku" data-th="<?= $block->escapeHtml(__('SKU')) ?>"><?= /* @escapeNotVerified */ $block->prepareSku($block->getSku()) ?></td>
+    <td class="col price" data-th="<?= $block->escapeHtml(__('Price')) ?>">
+        <?= $block->getItemPriceHtml() ?>
+    </td>
+    <td class="col qty" data-th="<?= $block->escapeHtml(__('Qty')) ?>">
+        <ul class="items-qty">
+            <?php if ($block->getItem()->getQtyOrdered() > 0): ?>
+                <li class="item">
+                    <span class="title"><?= /* @escapeNotVerified */ __('Ordered') ?></span>
+                    <span class="content"><?= /* @escapeNotVerified */ $block->getItem()->getQtyOrdered()*1 ?></span>
+                </li>
+            <?php endif; ?>
+            <?php if ($block->getItem()->getQtyShipped() > 0): ?>
+                <li class="item">
+                    <span class="title"><?= /* @escapeNotVerified */ __('Shipped') ?></span>
+                    <span class="content"><?= /* @escapeNotVerified */ $block->getItem()->getQtyShipped() * 1 ?></span>
+                </li>
+            <?php endif; ?>
+            <?php if ($block->getItem()->getQtyCanceled() > 0): ?>
+                <li class="item">
+                    <span class="title"><?= /* @escapeNotVerified */ __('Canceled') ?></span>
+                    <span class="content"><?= /* @escapeNotVerified */ $block->getItem()->getQtyCanceled()*1 ?></span>
+                </li>
+            <?php endif; ?>
+            <?php if ($block->getItem()->getQtyRefunded() > 0): ?>
+                <li class="item">
+                    <span class="title"><?= /* @escapeNotVerified */ __('Refunded') ?></span>
+                    <span class="content"><?= /* @escapeNotVerified */ $block->getItem()->getQtyRefunded()*1 ?></span>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </td>
+    <td class="col subtotal" data-th="<?= $block->escapeHtml(__('Subtotal')) ?>">
+        <?= $block->getItemRowTotalHtml() ?>
+    </td>
+</tr>

@@ -1,0 +1,424 @@
+.cms-page-view .swatch-option-tooltip{
+    z-index: 9999;
+}
+#mgantsfastorder-form .mgantssearch-input{max-width: 250px;}
+#mgantsfastorder-form .mgantsloading{
+    background-image: url('../Mageants_FastOrder/images/loading.gif');
+    background-position: 92% center;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+}
+
+.mgantsfastorder-autocomplete {max-height: 250px;  overflow-y: auto;}
+.mgantsfastorder-autocomplete ul li.active{background-color:#e7bcb6 !important;} 
+
+#mgantsfastorder-form table th{text-align: center;}
+#mgantsfastorder-form table td{vertical-align: middle;text-align: center;}
+.mgantsfastorder-hidden{display:none !important;}
+.mgantsmage-error[generated]{margin-top: 7px;color: #e02b27;font-size: 1.2rem;}
+
+#mgantscontent-option-product #mgantsfastorder-form-option .control ul{padding: 0;margin-bottom: 0;}
+#mgantscontent-option-product #mgantsfastorder-form-option .control ul li{list-style: none;}
+#mgantscontent-option-product #mgantsfastorder-form-option .mgantsproduct-option > .field > .label{font-weight: 600}
+#mgantscontent-option-product #mgantsfastorder-form-option .mgantsproduct-option > .field.required > .label:after{
+    content: '*';
+    color: #e02b27;
+    font-size: 1.2rem;
+    margin: 0 0 0 5px;
+}
+#mgantscontent-option-product #mgantsfastorder-form-option .mgantsproduct-option .field.required .legend{
+    font-weight: 600;
+    font-size: 1.4rem;
+    border: none;
+    display: inline-block;
+    float: none;
+    margin: 0 0 8px;
+    padding: 0;
+}
+
+#mgantscontent-option-product #mgantslinks-advice-container,#mgantscontent-option-product #mgantsvalidation-message-box{display:none;}
+
+#mgantsfastorder-form table th.mgantsfastorder-row-ref{width:310px;}
+#mgantsfastorder-form table th.mgantsfastorder-row-qty{width:54px;}
+#mgantsfastorder-form table th.mgantsfastorder-row-image{width:70px;}
+#mgantsfastorder-form table th.mgantsfastorder-row-edit, th.mgantsfastorder-row-add, th.mgantsfastorder-row-price{width:110px;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete{
+    position: absolute;
+    background-color: #fff;
+    width: 254px;
+    text-align: -webkit-auto;
+    z-index: 1;
+}
+#mgantsfastorder-form .mgantsfastorder-row-image img{cursor:pointer;max-width: 70px}
+#mgantsfastorder-form .mgantsfastorder-row-qty .qty{text-align: center;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul{list-style: none;padding-left: 0;border: 1px solid #C2C2C2;margin-bottom:0;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li{cursor: pointer;padding: 10px;margin-bottom:0;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li:hover{background-color:#E7BCB6;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li a{text-decoration: none;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li img{float:left;margin-right: 10px;width:50px;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li .mgantsproduct-price .mgantsprice{font-weight: 600;color: #000;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li .mgantsproduct-price .mgantsprice:after{clear:both;content: '';}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li .mgantsproduct-sku{color:#000;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li .mgantsproduct-price{text-align:right;}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li .mgantsproduct-sku .type:after{content: '#:';}
+#mgantsfastorder-form .mgantsfastorder-autocomplete ul li .mgantsproduct-info .mgantshighlight{color:#ff0000;font-weight: bold;}
+
+#mgantsfastorder-form table td.mgantsfastorder-row-name{padding: 10px 30px 10px 30px;text-align: center;}
+#mgantsfastorder-form table td.mgantsfastorder-row-name ul{list-style: none;padding-left: 0;}
+#mgantsfastorder-form table td.mgantsfastorder-row-name ul, td.mgantsfastorder-row-name ul li{margin:0;}
+#mgantsfastorder-form table td.mgantsfastorder-row-name ul span.price{color:#ff0000;}
+#mgantscontent-option-product {
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    width: 380px;
+    margin-left: -150px;
+    margin-top: -100px;
+    min-height: 100px;
+    max-height: 420px;
+    background-color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 0 10px -5px #999999;
+    overflow-y: auto!important;
+    z-index: 9999;
+    border: 1px solid #e6e6e6 !important;
+}
+
+#mgantscontent-option-product .product-name {font-weight: bold;}
+#mgantscontent-option-product .mgantsproduct-option {padding: 10px;border: 1px solid #cccccc;}
+#mgantscontent-option-product .price-box {margin: 7px 0;}
+#mgantscontent-option-product .price-box .price {color: #3399cc;font-size: 16px;font-weight: bold;}
+#mgantscontent-option-product img.image {max-width: 100%;width: 100px;}
+#mgantscontent-option-product .actions {border-top: 1px solid #cccccc;padding-top: 10px;}
+#mgantscontent-option-product .actions button.primary {
+    width: auto;
+    line-height: 1.6rem;
+    padding: 7px 15px;
+    margin: 0 10px;
+    font-size: 1.4rem;
+}
+
+#mgantsfastorder-form tr td.mgantshide-border, #mgantsfastorder-form tr.mgantsrow-error td{border-top: 0;}
+#mgantsfastorder-form tr.mgantsrow-error{border: 1px solid #ff0000;}
+#mgantsfastorder-form .mgantsfastorder-lightbox{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    display: block;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(53, 53, 53, 0.639216);
+}
+
+#mgantsfastorder-form .mgantsfastorder-lightbox img{
+    max-width: 85%;
+    max-height: 85%;
+    z-index: 1000;
+    margin: 4% auto;
+    display: block;
+}
+
+#mgantsfastorder-form .mgantsfile-upload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    float: left;
+}
+#mgantsfastorder-form .mgantsfile-upload input.mgantsupload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+#mgantsfastorder-form .mgantssample-csv{
+    float: left;
+    padding: inherit;
+}
+
+.mgantsswatch-attribute-label,#mgantsfastorder-form table td.mgantsfastorder-row-name ul span.label {font-weight: bold;position: relative;}
+.mgantsswatch-attribute-label.required {padding-right: 10px;}
+
+.mgantsswatch-attribute-label[data-required="1"]:before {
+    content: '*';
+    color: red;
+    position: absolute;
+    right: -11px;
+    top: -2px;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.mgantsswatch-attribute-selected-option {color: #646464;padding-left: 17px;}
+.mgantsswatch-attribute-options {margin-top: 10px;}
+.mgantsswatch-option {
+    display: inline-block;
+    padding: 1px 2px;
+    min-width: 30px;
+    max-width: 90px;
+    height: 20px;
+    margin: 0 10px 5px 0;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid rgb(218, 218, 218);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mgantsswatch-option.text {
+    background: #F2F2F2;
+    color: #7F7F7F;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 4px 8px;
+    min-width: 22px;
+    margin-right: 7px;
+}
+
+.mgantsswatch-option.selected {
+    outline: 2px solid #FF5100;
+    border: 1px solid #fff;
+    color: #333;
+}
+
+.mgantsswatch-option.text.selected {
+    background-color: #FFF !important;
+}
+
+.clearfix:after {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+.mgantsswatch-attribute.size .mgantsswatch-option, .mgantsswatch-attribute.manufacturer .mgantsswatch-option {
+    background: rgb(240, 240, 240);
+    color: rgb(148, 148, 148);
+}
+
+.mgantsswatch-attribute.size .mgantsswatch-option.selected, .mgantsswatch-attribute.manufacturer .mgantsswatch-option.selected {
+    color: black;
+    background: #fff;
+    border: 1px solid #fff;
+}
+
+.mgantsswatch-option:not(.disabled):hover {
+    outline: 1px solid #999;
+    border: 1px solid #fff;
+    color: #333;
+}
+
+.mgantsswatch-option.image:not(.disabled):hover,
+.mgantsswatch-option.color:not(.disabled):hover {outline: 2px solid #FF5216;border: 1px solid #fff;}
+
+.mgantsswatch-option.disabled {cursor: default;}
+
+.mgantsswatch-option.disabled:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    background: -moz-linear-gradient(to left top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 42%, rgba(255,255,255,1) 43%, rgba(255,255,255,1) 46%, rgba(255,82,22,1) 47%, rgba(255,82,22,1) 53%, rgba(255,255,255,1) 54%, rgba(255,255,255,1) 57%, rgba(255,255,255,0) 58%, rgba(255,255,255,0) 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(42%,rgba(255,255,255,0)), color-stop(43%,rgba(255,255,255,1)), color-stop(46%,rgba(255,255,255,1)), color-stop(47%,rgba(255,82,22,1)), color-stop(53%,rgba(255,82,22,1)), color-stop(54%,rgba(255,255,255,1)), color-stop(57%,rgba(255,255,255,1)), color-stop(58%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0)));
+    background: -webkit-linear-gradient(to left top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 42%,rgba(255,255,255,1) 43%,rgba(255,255,255,1) 46%,rgba(255,82,22,1) 47%,rgba(255,82,22,1) 53%,rgba(255,255,255,1) 54%,rgba(255,255,255,1) 57%,rgba(255,255,255,0) 58%,rgba(255,255,255,0) 100%);
+    background: -o-linear-gradient(to left top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 42%,rgba(255,255,255,1) 43%,rgba(255,255,255,1) 46%,rgba(255,82,22,1) 47%,rgba(255,82,22,1) 53%,rgba(255,255,255,1) 54%,rgba(255,255,255,1) 57%,rgba(255,255,255,0) 58%,rgba(255,255,255,0) 100%);
+    background: -ms-linear-gradient(to left top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 42%,rgba(255,255,255,1) 43%,rgba(255,255,255,1) 46%,rgba(255,82,22,1) 47%,rgba(255,82,22,1) 53%,rgba(255,255,255,1) 54%,rgba(255,255,255,1) 57%,rgba(255,255,255,0) 58%,rgba(255,255,255,0) 100%);
+    background: linear-gradient(to left top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 42%,rgba(255,255,255,1) 43%,rgba(255,255,255,1) 46%,rgba(255,82,22,1) 47%,rgba(255,82,22,1) 53%,rgba(255,255,255,1) 54%,rgba(255,255,255,1) 57%,rgba(255,255,255,0) 58%,rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 );
+}
+
+.mgantsswatch-option-tooltip {
+    max-width: 140px;
+    max-height: 100%;
+    min-height: 20px;
+    min-width: 20px;
+    position: absolute;
+    padding: 5px;
+    background: #fff;
+    color: rgb(148, 148, 148);
+    border: 1px solid #adadad;
+    display: none;
+    z-index: 999;
+    text-align: center;
+}
+
+.mgantsswatch-option-tooltip .corner,
+.mgantsswatch-option-tooltip-layered .corner {
+    left: 40%;
+    position: absolute;
+    bottom: 0;
+    height: 8px;
+}
+
+.mgantsswatch-option-tooltip .corner:after,
+.mgantsswatch-option-tooltip-layered .corner:after {
+    content: '';
+    position: relative;
+    top: 1px;
+    left: -15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 7.5px 0 7.5px;
+    border-color: #fff transparent transparent transparent;
+    font-size: 1px;
+}
+
+.mgantsswatch-option-tooltip .corner:before,
+.mgantsswatch-option-tooltip-layered .corner:before {
+    content: '';
+    position: relative;
+    top: 2px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8.5px 0 8.5px;
+    border-color: #adadad transparent transparent transparent;
+    font-size: 1px;
+}
+
+.mgantsswatch-option-tooltip .image,
+.mgantsswatch-option-tooltip-layered .image {
+    display: block;
+    height: 130px;
+    width: 130px;
+    margin: 0 auto;
+}
+
+.mgantsswatch-option-tooltip .title {
+    max-width: 140px;
+    min-height: 20px;
+    max-height: 200px;
+    color: rgb(40, 40, 40);
+    text-align: center;
+    display: block;
+    overflow: hidden;
+}
+
+.mgantsswatch-opt {
+    margin: 20px 0;
+}
+
+.mgantsswatch-more {
+    display: inline-block;
+    margin: 2px 0;
+    text-decoration: none !important;
+    position: static;
+    z-index: 1;
+}
+
+/* Layered Features */
+.mgantsswatch-option-link-layered {
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.mgantsswatch-option-tooltip-layered {
+    width: 140px;
+    position: absolute;
+    background: #fff;
+    color: rgb(148, 148, 148);
+    border: 1px solid #adadad;
+    display: none;
+    z-index: 999;
+    left: -47px;
+}
+
+.mgantsswatch-visual-tooltip-layered {
+    height: 160px;
+    top: -170px;
+}
+
+.mgantsswatch-textual-tooltip-layered {
+    height: 30px;
+    top: -40px;
+}
+
+.mgantsswatch-option-link-layered:hover > .mgantsswatch-option-tooltip-layered {
+    display: block;
+}
+
+.mgantsswatch-attribute-options .mgantsswatch-option-tooltip-layered .title {
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    color: rgb(40, 40, 40);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.mgantsswatch-option-disabled:after {
+    content: '';
+    position: absolute;
+    width: 42px;
+    height: 2px;
+    background: red;
+    transform: rotate(-30deg);
+    -o-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -ms-transform: rotate(-30deg);
+    -webkit-transform: rotate(-30deg);
+    z-index: 995;
+    left: -4px;
+    top: 10px;
+}
+
+.mgantsswatch-option-disabled {
+    outline: none !important;
+    cursor: default;
+    border: 0;
+}
+
+@media only screen and (min-width: 768px){
+    #mgantscontent-option-product{
+        left: 45%;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    #mgantscontent-option-product{
+        max-width: 278px;
+    }
+    #mgantsfastorder-form table tr{
+        border: 1px solid #C2C2C2;
+        margin-top: 10px;
+    }
+    #mgantsfastorder-form table td.mgantsfastorder-row-image{
+        width: 150px;
+    }
+    #mgantsfastorder-form .mgantsfastorder-row-image img{
+        max-width: 150px
+    }
+    #mgantsfastorder-form table td{
+        text-align:left;
+    }
+    #mgantsfastorder-form table td.mgantsfastorder-row-name{
+        padding-left: 10px;
+    }
+    #mgantsfastorder-form .mgantsfastorder-row-qty .qty{
+        width:54px;
+    }
+}
+
+@media (max-width: 480px) and (orientation:landscape) {
+    #mgantscontent-option-product {
+        overflow-y: auto!important;
+        max-height: 300px;
+    }
+}

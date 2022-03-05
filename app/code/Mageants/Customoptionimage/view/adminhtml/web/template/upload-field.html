@@ -1,0 +1,26 @@
+<div class="mageants-upload-field">
+    <span data-bind="click: del, attr: { id: mageants_upl_span, class: getClass()}">
+        <img data-bind="attr: {id: mageants_upl_preview, src: tempImg}" width="32px" height="32px" alt=""/>
+    </span>
+    <span class="mageants-upload-button" data-bind="event: { click: clickUpload }">
+    </span>
+    <input type="hidden" data-bind="
+        attr: {
+            name: inputName,
+            form: 'product_form',
+            id: uploadFieldId,
+            value: tempImg
+        }"
+    />
+    <input type="file" data-bind="
+        hasFocus: focused,
+        event: { change: readURL },
+        attr: {
+            placeholder: placeholder,
+            'aria-describedby': noticeId,
+            id: uid,
+            disabled: disabled,
+            form: 'product_form'
+        }"
+    />
+</div>

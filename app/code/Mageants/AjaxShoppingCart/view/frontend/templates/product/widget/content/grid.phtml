@@ -1,0 +1,325 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+/** @var \Magento\CatalogWidget\Block\Product\ProductsList $block */
+$mainBlock =  $block;
+?>
+<?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())): ?>
+    <?php
+    $type = 'widget-product-grid';
+
+    $mode = 'grid';
+
+    $image = 'new_products_content_widget_grid';
+    $items = $block->getProductCollection()->getItems();
+    $popupCollectionsFormCatalog = $items;
+    $showWishlist = true;
+    $showCompare = true;
+    $showCart = true;
+    $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    $description = false;
+    ?>
+    <div class="block widget block-products-list <?= /* @noEscape */ $mode ?>">
+        <?php if ($block->getTitle()): ?>
+            <div class="block-title">
+                <strong><?= $block->escapeHtml(__($block->getTitle())) ?></strong>
+            </div>
+        <?php endif ?>
+        <div class="block-content">
+            <?= /* @noEscape */ '<!-- ' . $image . '-->' ?>
+            <div class="products-<?= /* @noEscape */ $mode ?> <?= /* @noEscape */ $mode ?>">
+                <ol class="product-items <?= /* @noEscape */ $type ?>">
+                    <?php $iterator = 1; ?>
+                    <?php foreach ($items as $_item): ?>
+                        <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
+                        <div class="product-item-info">
+                            <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
+                                <?= $block->getImage($_item, $image)->toHtml() ?>
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a title="<?= $block->escapeHtml($_item->getName()) ?>"
+                                       href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
+                                       class="product-item-link">
+                                        <?= $block->escapeHtml($_item->getName()) ?>
+                                    </a>
+                                </strong>
+                                <?php if ($templateType): ?>
+                                    <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
+                                <?php endif; ?>
+
+                                <?= $block->getProductPriceHtml($_item, $type) ?>
+
+                                <?= $block->getProductDetailsHtml($_item) ?>
+
+                                <?php if ($showWishlist || $showCompare || $showCart): ?>
+                                    <div class="product-item-inner">
+                                        <div class="product-item-actions">
+                                            <?php if ($showCart): ?>
+                                                <div class="actions-primary">
+                                                    <?php if ($_item->isSaleable()): ?>
+                                                        <?php $postParams = $block->getAddToCartPostParams($_item); ?>
+                                                        <form id="product_addtocart_form" data-role="tocart-form" data-product-sku="<?= $block->escapeHtml($_item->getSku()) ?>" action="<?= $block->escapeUrl($postParams['action']) ?>" method="post">
+                                                            <input type="hidden" name="product" value="<?= $block->escapeHtmlAttr($postParams['data']['product']) ?>">
+                                                            <input type="hidden" name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>" value="<?= /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>">
+                                                            <?= $block->getBlockHtml('formkey') ?>
+                                                            <button type="submit"
+                                                                    title="<?= $block->escapeHtml(__('Add to Cart')) ?>"
+                                                                    class="action tocart primary"
+                                                                    id="product-addtocart-button">
+                                                                <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                            </button>
+                                                        </form>
+                                                    <?php else: ?>
+                                                        <?php if ($_item->getIsSalable()): ?>
+                                                            <div class="stock available"><span><?= $block->escapeHtml(__('In stock')) ?></span></div>
+                                                        <?php else: ?>
+                                                            <div class="stock unavailable"><span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($showWishlist || $showCompare): ?>
+                                                <div class="actions-secondary" data-role="add-to-links">
+                                                    <?php if ($this->helper(\Magento\Wishlist\Helper\Data::class)->isAllow() && $showWishlist): ?>
+                                                        <a href="#"
+                                                           data-post='<?= /* @noEscape */ $block->getAddToWishlistParams($_item) ?>' class="action towishlist" data-action="add-to-wishlist" title="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>">
+                                                            <span><?= $block->escapeHtml(__('Add to Wish List')) ?></span>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                    <?php if ($block->getAddToCompareUrl() && $showCompare): ?>
+                                                        <?php $compareHelper = $this->helper(\Magento\Catalog\Helper\Product\Compare::class);?>
+                                                        <a href="#" class="action tocompare" data-post='<?= /* @noEscape */ $compareHelper->getPostDataParams($_item) ?>' title="<?= $block->escapeHtmlAttr(__('Add to Compare')) ?>">
+                                                            <span><?= $block->escapeHtml(__('Add to Compare')) ?></span>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?= ($iterator == count($items) + 1) ? '</li>' : '' ?>
+                    <?php endforeach ?>
+                </ol>
+            </div>
+            <?= $block->getPagerHtml() ?>
+        </div>
+    </div>
+<?php endif;?>
+<?php
+
+/**
+ * @category  Mageants AjaxShoppingCart
+ * @package   Mageants_AjaxShoppingCart
+ * @copyright Copyright (c) 2017 Magento
+ * @author    Mageants Team <support@mageants.com>
+ */
+
+
+$controller = $this->getRequest()->getControllerName();
+$helper  = $this->helper('Mageants\AjaxShoppingCart\Helper\Data');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$selling = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/align");
+$sellingCount = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/sellingCount");
+$baseUrl = $helper->getBaseUrl();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+$totalItems = $cart->getQuote()->getItemsCount();
+$itemloopinslider = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/slideritemloop");
+$allowAutoplay = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/sliderautoplay");
+$allowAutoplayAfter = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/autoplayafter");
+$slidernav = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/slidernav");
+?>
+<?php
+
+function getMessagePopupIndex($sku, $cat, $mainBlock)
+{
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $productObject = $objectManager->get('Magento\Catalog\Model\Product');
+    $formKey = $objectManager->get('Magento\Framework\Data\Form\FormKey')->getFormKey();
+    $helper  = $objectManager->get('Mageants\AjaxShoppingCart\Helper\Data');
+    $baseUrl = $helper->getBaseUrl();
+    $image = $helper->getConfigValue("mageants_ajaxshoppingcart/display/image");
+    $imgDisplay = 'none';
+    if ($image) {
+        $imgDisplay = "block";
+    } else {
+        $imgDisplay = "none";
+    }
+    $imageHelper = $objectManager->create('\Magento\Catalog\Helper\Image');
+    $currency = $objectManager->get('\Magento\Directory\Model\Currency');
+    $currentUrl = $helper->getCurrentUrl();
+    $cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+    $subTotal = $cart->getQuote()->getSubtotal();
+    $totalQuantity = $cart->getQuote()->getItemsQty();
+    $show_cart_info = $helper->getConfigValue("mageants_ajaxshoppingcart/display/show_cart_info");
+    $product_cart = $helper->getConfigValue("mageants_ajaxshoppingcart/display/product_cart");
+    $cart_total = $helper->getConfigValue("mageants_ajaxshoppingcart/display/cart_total");
+    $checkoutButton = $helper->getConfigValue("mageants_ajaxshoppingcart/display/checkout");
+    
+    $show_cart_infoDisplay = 'block';
+    if ($show_cart_info) {
+        $show_cart_infoDisplay = "block";
+    } else {
+        $product_cart = 0;
+        $cart_total = 0;
+    }
+    
+    $sellingTitle = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/title");
+    $selling = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/align");
+    $sellingCount = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/sellingCount");
+    $useSlider = $helper->getConfigValue("mageants_ajaxshoppingcart/selling/slider");
+    if ($useSlider == 0 && $sellingCount > 3) {
+        $sellingCount = 3;
+    }
+    $innerBlock = '';
+    if ($cat == "1") {
+        $innerBlock = $objectManager->create("\Magento\Catalog\Block\Product\View");
+    } elseif ($cat == 0) {
+        $innerBlock = $objectManager->create("\Magento\Catalog\Block\Product\ListProduct");
+    }
+
+    $relatedBlock = $objectManager->create("\Magento\Catalog\Block\Product\ProductList\Related");
+    $_item = $productObject->loadByAttribute('sku', $sku);
+    $data = "";
+    $data .= '<div class="cpmodal-message-' . $_item->getId() . '" style="display: none;">';
+    $data .= '<div class="modal-content"> 
+				    <div class="popup-header">
+				        <h2>Information</h2>
+				    </div>';
+    $data .=    '<h4 class="add-message">You have added <a href="' .  $mainBlock->escapeUrl($innerBlock->getProductUrl($_item))  . '">' . $_item->getName() . '</a> to cart.</h4> 
+					    <div class="center" style="display:' . $imgDisplay . '">
+					        <img style="display:' . $imgDisplay . '" src="' . $imageHelper->init($_item, "product_base_image")->getUrl() . '" />     
+					    </div>';
+    $data .= ' <div class="cart-info" style="display:' . $show_cart_infoDisplay . '">';
+    if ($product_cart == 1) {
+        $data .= '<h4 class="qty-message">There is <strong class="ajax-count">' . $totalQuantity . '</strong> Item in cart </h4>';
+    }
+    if ($cart_total == 1) {
+        $data .= '<h4 class="subtotal-message">Cart Subtotal: <strong class="ajax-subtotal">' . $subTotal . '</strong></h4>';
+    }
+    $data .= '</div>';
+    $data .= '<div class="action-buttons-model">';
+    if ($checkoutButton) {
+        $data .= '<a id="gottoCheckout" href="' . $baseUrl . 'checkout/" class="action primary checkout">Checkout</a>';
+    }
+    $data .= '<a id="Continue" href="#" class="action primary button4 buttonContinue">Continue</a>
+				        </div>';
+
+    $sellingCollection = '';
+    if ($selling == "related") {
+        $sellingCollection = $_item->getRelatedProducts();
+    } elseif ($selling == "crosssell") {
+        $sellingCollection = $_item->getCrossSellProducts();
+    }
+    $i = 1;
+    if (!empty($sellingCollection) && $sellingCount > 0):
+        $data .= '<h2>' . $sellingTitle . '</h2>';
+        if ($useSlider == 1) {
+            $data .= '<div class="products wrapper grid products-grid products slider">
+					            <div class="products list items product-items owl-carousel">';
+        } else {
+            $data .= '<div class="products wrapper grid products-grid products noslider">
+					            <div class="products list items product-items">';
+        }
+
+        foreach ($sellingCollection as $_item):
+            if ($i <= $sellingCount) {
+                $available = '';
+                $sku = $_item->getSku();
+                $_item = $productObject->loadByAttribute('sku', $sku);
+                if (!$_item->isComposite() && $_item->isSaleable()):
+                    if (!$_item->getRequiredOptions()):
+                        $available = 'related-available';
+                    endif;
+                endif;
+                $data .= '<div class="item product product-item product-item-cart">			        
+							                    <div class="product-item-info ' . $available . '">';
+                $image = $imageHelper->init($_item, 'category_page_list')->constrainOnly(false)->keepAspectRatio(true)->keepFrame(false)->resize(400)->getUrl();
+                $data .= '<div class="product-item-photo"><a href="' . $_item->getProductUrl() . '" class="product photo product-item-photo">
+							                            <img src="' . $image . '" >
+							                        </a></div>
+							                        <div class="product details product-item-details">
+						    			                <strong class="product name product-item-name">
+						    			                	<a class="product-item-link" title="' . $_item->getName() . '" href="' . $_item->getProductUrl() .
+                    '">' . $_item->getName() . '</a>
+						    			                </strong>';
+                $data .= '<strong>' . $relatedBlock->getProductPrice($_item) . '</strong>';
+                $data .= '<form action="' . $innerBlock->getAddToCartUrl($_item) . '" method="post" id="product_addtocart_form" novalidate="novalidate">
+											        	<input name="form_key" type="hidden" value="' . $formKey . '">
+											        		<div class="product actions product-item-actions">
+						                                    <div class="actions-primary">';
+                if ($_item->isSaleable()):
+                    if ($_item->getTypeInstance()->hasRequiredOptions($_item)):
+                        $data .= '<input type="hidden" name="product" value="' . $_item->getId() . '">';
+                        $data .= '<div class="actions">
+							<button type="submit" title="Add to Cart" class="action primary tocart" id="product-addtocart-button"><span>Add to Cart</span>
+							</button></div>';
+                    else:
+
+                        $data .= '<input type="hidden" name="product" value="' . $_item->getId() . '">';
+                        $data .= '<div class="actions">
+																		            <button type="submit" title="Add to Cart" class="action primary tocart" id="product-addtocart-button">
+																		                <span>Add to Cart</span>
+																		            </button>
+																			    </div>';
+
+                    endif;
+                else:
+                    if ($_item->getIsSalable()):
+                        $data .= '<div class="stock available"><span>In stock</span></div>';
+                    else:
+                        $data .= '<div class="stock unavailable"><span>Out of stock</span></div>';
+                    endif;
+                endif;
+                $data .= '</div>
+						                                </div></form>
+													</div>
+							                    </div>
+						        	        </div>';
+                $i++;
+            }
+        endforeach;
+        $data .= '</div>
+					        </div>';
+    endif;
+    $data .= '</div>';
+    $data .= '</div>';
+    return $data;
+}
+?>
+
+<?php $_productCollection = $popupCollectionsFormCatalog ?>
+<div id="cartpro_modal" class="cartpro-modal mfp-hide">
+    <div class="cpmodal-loading">
+        <img src='<?php echo $this->getViewFileUrl('Mageants_AjaxShoppingCart/images/loader.gif'); ?>'>
+    </div>
+    <div class="cpmodal-wrapper">
+        <button class="cpmodal-close cp-close mfp-close">×</button>
+        <?php
+        if (sizeof($_productCollection) > 0 && !empty($_productCollection)) {
+            foreach ($_productCollection as $product) {  ?>
+                <?php echo getMessagePopupIndex($product->getSku(), "0", $mainBlock); ?>
+                <?php $sellingCollection = '';
+                if ($selling == "related") {
+                    $sellingCollection = $product->getRelatedProducts();
+                } elseif ($selling == "crosssell") {
+                    $sellingCollection = $product->getCrossSellProducts();
+                }
+                $i = 1;
+                if (!empty($sellingCollection) && $sellingCount > 0) {
+                    foreach ($sellingCollection as $_item) {
+                        echo getMessagePopupIndex($_item->getSku(), "0", $mainBlock);
+                    }
+                } ?>
+        <?php }
+        } ?>
+    </div>
+</div>
+
+

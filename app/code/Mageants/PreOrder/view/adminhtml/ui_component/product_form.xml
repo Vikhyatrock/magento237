@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category Mageants PreOrder
+ * @package Mageants_PreOrder
+ * @copyright Copyright (c) 2018  Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">   
+<modal name="advanced_inventory_modal" provider="product_form.product_form_data_source"> 
+    <fieldset name="stock_data">
+        <field name="backstock_preorders" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">780</item>
+                    <item name="rawOptions" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <settings>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+                <label translate="true">Allow Out-Of-Stock product for Pre-Order</label>
+                <dataScope>stock_data.backstock_preorders</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Mageants\PreOrder\Model\Source\Stockstatus"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="preorder_availability_date">
+             <argument name="data" xsi:type="array">
+                 <item name="config" xsi:type="array">
+                     <item name="label" xsi:type="string">Product Availability Date</item>
+                     <item name="formElement" xsi:type="string">date</item>
+                     <item name="sortOrder" xsi:type="number">810</item>
+                     <item name="dataScope" xsi:type="string">stock_data.preorder_availability_date</item>
+                     <item name="scopeLabel" xsi:type="string">[GLOBAL]</item>
+                     <item name="imports" xsi:type="array">
+                        <item name="visible" xsi:type="string">${$.provider}:data.product.stock_data.backorders</item>
+                    </item>
+                 </item>
+             </argument>
+        </field> 
+        <field name="preorder_note">
+             <argument name="data" xsi:type="array">
+                 <item name="config" xsi:type="array">
+                     <item name="label" xsi:type="string">Pre-Order Note</item>
+                     <item name="formElement" xsi:type="string">input</item>
+                     <item name="sortOrder" xsi:type="number">820</item>
+                     <item name="dataScope" xsi:type="string">stock_data.preorder_note</item>
+                     <item name="scopeLabel" xsi:type="string">[GLOBAL]</item>
+                     <item name="notice" xsi:type="string" translate="true">If this field is blank, the default message edited in the configuration will be displayed.</item>
+                     <item name="imports" xsi:type="array">
+                        <item name="visible" xsi:type="string">${$.provider}:data.product.stock_data.backorders</item>
+                    </item>
+                 </item>
+             </argument>
+        </field>  
+    </fieldset>       
+</modal>
+</form>

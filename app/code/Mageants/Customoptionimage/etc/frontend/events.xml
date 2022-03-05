@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mageants_custom_options_render_select_before_control">
+        <observer name="coi_add_select_render_before_control" instance="Mageants\Customoptionimage\Observer\Render\AddSelectRenderBeforeControl" />
+    </event>
+</config>

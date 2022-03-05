@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @category Mageants FreeShippingBar
+ * @package Mageants_FreeShippingBar
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="admin-2columns-left">
+	<head>
+    	<css src="jquery/colorpicker/css/colorpicker.css"/>
+    	<css src="Mageants_FreeShippingBar::css/custom.css"/>
+    	<script src="Mageants_FreeShippingBar::js/freeshippingbar.js"/>
+	</head>
+    <body>
+    	<referenceContainer name="left">
+        	<block class="Mageants\FreeShippingBar\Block\Adminhtml\Edit\Tabs" name="freeshippingbar_tabs">
+				<block class="Mageants\FreeShippingBar\Block\Adminhtml\Edit\Tab\General" name="freeshippingbar_tabs_general"/>
+					<action method="addTab">
+	                    <argument name="name" xsi:type="string">general_section</argument>
+	                    <argument name="block" xsi:type="string">freeshippingbar_tabs_general</argument>
+	                </action>
+	                <block class="Mageants\FreeShippingBar\Block\Adminhtml\Edit\Tab\Whatdisplay" name="freeshippingbar_tabs_What_to_display" />
+					<action method="addTab">
+	                    <argument name="name" xsi:type="string">whattodisplay_section</argument>
+	                    <argument name="block" xsi:type="string">freeshippingbar_tabs_What_to_display</argument>
+	                </action>
+	                <block class="Mageants\FreeShippingBar\Block\Adminhtml\Edit\Tab\Wheredisplay" name="freeshippingbar_tabs_Where_to_display"/>
+					<action method="addTab">
+	                    <argument name="name" xsi:type="string">wheretodisplay_section</argument>
+	                    <argument name="block" xsi:type="string">freeshippingbar_tabs_Where_to_display</argument>
+	                </action>
+	                <!-- This code is added for products grid -->
+					<action method="addTab">
+						<argument name="name" xsi:type="string">attachment_products</argument>
+						<argument name="block" xsi:type="array">
+							<item name="label" xsi:type="string">Select Product</item>
+							<item name="title" xsi:type="string">Select Product</item>
+							<item name="url" xsi:type="helper" helper="Mageants\FreeShippingBar\Helper\Data::getProductsGridUrl"></item>
+							<item name="class" xsi:type="string">ajax</item>
+						</argument>
+					</action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+    		<block 
+    			class="Mageants\FreeShippingBar\Block\Adminhtml\Edit" 
+    			name="freeshippingbar_edit"/> 
+        </referenceContainer>
+    </body>
+</page>

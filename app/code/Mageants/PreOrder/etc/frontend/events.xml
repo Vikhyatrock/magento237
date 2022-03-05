@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category Mageants PreOrder
+ * @package Mageants_PreOrder
+ * @copyright Copyright (c) 2018  Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_type_prepare_full_options">
+        <observer name="set_additional_options" instance="Mageants\PreOrder\Observer\SetPreOrderOptions"/>
+    </event>
+
+    <event name="checkout_onepage_controller_success_action">
+	    <observer name="preorder_status_observer" instance="Mageants\PreOrder\Observer\PreorderStatus"  />
+	</event>
+</config>

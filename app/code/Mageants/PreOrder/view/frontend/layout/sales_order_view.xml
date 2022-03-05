@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category Mageants PreOrder
+ * @package Mageants_PreOrder
+ * @copyright Copyright (c) 2018  Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Mageants\PreOrder\Block\Preorder" name="preorder_note" after="order.comments" as="preorder_message" template="Ordernote.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

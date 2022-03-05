@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @category Mageants FreeShippingBar
+ * @package Mageants_FreeShippingBar
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\OfflineShipping\Model\Carrier\Flatrate" type="Mageants\FreeShippingBar\Model\Carrier\Flatrate" />
+    <preference for="Magento\Quote\Model\Quote\Address\Total\Shipping" type="Mageants\FreeShippingBar\Model\Quote\Address\Total\Shipping" />
+    <preference for="Mageants\FreeShippingBar\Api\Data\GridInterface" type="Mageants\FreeShippingBar\Model\FreeShippingBar" />
+    <virtualType name="Mageants\FreeShippingBar\Model\ResourceModel\FreeShippingBar\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageants_freeshippingbar</argument>
+            <argument name="resourceModel" xsi:type="string">Mageants\FreeShippingBar\Model\ResourceModel\FreeShippingBar</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="grid_record_grid_list_data_source" xsi:type="string">Mageants\FreeShippingBar\Model\ResourceModel\FreeShippingBar\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

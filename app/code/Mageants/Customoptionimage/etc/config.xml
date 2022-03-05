@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <customoption>
+            <image_size>
+                <Dropdown_y>60</Dropdown_y>
+                <Dropdown_x>60</Dropdown_x>
+                <Radio_y>50</Radio_y>
+                <Radio_x>50</Radio_x>
+                <Checkbox_y>50</Checkbox_y>
+                <Checkbox_x>50</Checkbox_x>
+                <Multiple_y>40</Multiple_y>
+                <Multiple_x>40</Multiple_x>
+            </image_size>
+        </customoption>
+    </default>
+</config>

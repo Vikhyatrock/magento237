@@ -1,0 +1,64 @@
+<?php
+/**
+ * @category Mageants ZipcodeCod
+ * @package Mageants_ZipcodeCod
+ * @copyright Copyright (c) 2017 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+?>
+<div class="zipcode-template">
+        <input type="hidden" name="ajaxurl" id="ajaxurl" 
+                value="<?= /* @noEscape */ $block->getUrl('zipcodecod/index/check'); ?>" />
+        <label><?= /* @noEscape */ __('CHECK CASH ON DELIVERY AVAILABILITY'); ?></label>
+        <div class="field zip-fields">
+            <input class="check-zip" type="text" id="checkzipcode" name="checkzipcode" 
+                value="" placeholder="Enter Zipcode"/>
+            <input class="zip-btn action primary" type="button" value="Check" name="button" id="checkavailability"/>
+        </div>
+        <div for="qty" generated="true" class="mage-error" id="zipcode-error" 
+            style="display: none;"><?= /* @noEscape */ __('Please enter a valid zipcode in this field.') ?></div>
+    <div style="display:none" id="zipcode-info"></div>
+</div>
+<script type="text/javascript">
+require(['jquery'], function($){
+     $(document).ready(function(){
+        $('#checkzipcode').keypress(function (e) {
+         var key = e.which;
+         if(key == 13)  // the enter key code
+          {
+            e.preventDefault();
+            $( "#checkavailability" ).trigger( "click" );
+          }
+        });          
+        
+        $("#checkavailability").click(function(){
+            if($("#checkzipcode").val() != '')
+            {
+                var url = $("#ajaxurl").val();
+                var zipcode = $("#checkzipcode").val();
+                var data = {"zipcode" : zipcode};
+                console.log(data);
+                console.log(url);
+                $('#zipcode-error').hide();
+                $('.check-zip').removeClass('mage-error');                
+                $.ajax({
+                    showLoader: true,
+                    url: url,
+                    data: data,
+                    type: "POST",
+                    dataType: 'json'
+                }).done(function (data) {
+                    $("#zipcode-info").show();
+                    $("#zipcode-info").html(data.html);        
+                });
+            }
+            else
+            {
+                $('#zipcode-error').show();
+                $('.check-zip').addClass('mage-error');                
+            }
+        });
+    });
+});
+</script>
+

@@ -1,0 +1,178 @@
+<?php
+/**
+ * @category Mageants ExtraFee
+ * @package Mageants_ExtraFee
+ * @copyright Copyright (c) 2017 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+
+$product=$block->getProduct();
+$overrideCat=$product->getOverrideCat();
+if ($overrideCat=='') {$overrideCat="No";}
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cookieManager = $objectManager->get('Magento\Framework\Stdlib\CookieManagerInterface');
+$priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data');
+$productExtraFeeLabel=[];
+$productExtraFeeAmount=0;
+if ($overrideCat=="Yes") {
+    $ExtraFeeList=$product->getExtrafeelist();
+    $collection=$block->getExtraFeeProductCollection()->getData();
+    if (strlen($ExtraFeeList)>0 && !empty($collection)) {
+        ?>
+    <div class="extrafee_prd">
+        <div class="title"><h3><?= __($block->getProductTitle()); ?> </h3></div>
+        <div class="fee_option">
+            <?php
+            foreach ($collection as $fee) { if (strpos($ExtraFeeList, $fee['id']) !== false) { ?> <div class="option">
+                    <?php if ($fee['is_mandatory']=='Yes') { ?>
+                        <label for="<?= " ".__($fee['feesname']); ?>">
+                        <input type="checkbox" checked="checked" disabled="disabled" name="feesname[]" />
+                        <span><?php if ($fee['type']=='Percentage') { echo $fee['amount']."%" ;
+                              } else {echo $priceHelper->currency($fee['amount'], true, false);} ?></span>
+                        <span><?= " ".__($fee['feesname']) ?></span>
+                        </label><br>
+                        <input type="hidden" name="feesname[]" value="<?= $fee['id']; ?>">
+                        <?php
+                    } else { ?>    
+                    <input type="checkbox" name="feesname[]" value="<?= $fee['id'] ?>"> <span> <?php if ($fee['type']=='Percentage') { echo $fee['amount']."%" ;
+                                                                    } else {echo $priceHelper->currency($fee['amount'], true, false);}
+                                                                    echo " ".__($fee['feesname']); ?></span> <br>
+                <?php } ?> </div>
+            <?php } }
+            ?>
+        </div>
+    </div>
+    <?php } } elseif ($overrideCat=="No") { ?>
+    <?php $catcollection=$block->getExtraFeeCategoryCollection();
+    if (!empty($catcollection)) {
+        $categories = $product->getCategoryIds();
+        $catDis=0;?>
+    <div class="extrafee_prd">
+        <div class="fee_option">
+            <?php foreach ($catcollection as $fee) {
+                    $feesData=$fee->getData();
+                    $catIds = explode(',', $feesData['category_ids']);
+                    $c = array_intersect($categories, $catIds);
+                if (!empty($c)) { ?> 
+                    <?php if ($catDis==0) {?>
+                        <div class="title"><h3><?= __($block->getCategoryTitle()); ?> </h3></div>
+                    <?php } $catDis++; ?>    
+                    <div class="option">
+                    <?php if ($feesData['is_mandatory']=='Yes') { ?>
+                        <label for="<?= __($feesData['feesname']) ?>">
+                        <input type="checkbox" checked="checked" disabled="disabled" name="feesname[]" />
+                        <span><?php if ($feesData['type']=='Percentage') { echo $feesData['amount']."%" ;
+                              } else { echo $priceHelper->currency($feesData['amount'], true, false);} ?></span>
+                        <span><?= " ".__($feesData['feesname']) ?></span>
+                        </label><br>
+                        <input type="hidden" name="feesname[]" value="<?= $feesData['id']; ?>">
+                        <?php
+                    } else { ?>    
+                    <input type="checkbox" name="feesname[]" value="<?= $feesData['id'] ?>"> <span> <?php if ($feesData['type']=='Percentage') { echo " ".$feesData['amount']."%" ;
+                                                                    } else { echo $priceHelper->currency($feesData['amount'], true, false);}
+                                                                    echo " ".__($feesData['feesname']); ?></span> <br>
+                    
+                <?php } ?> </div>
+            <?php } }
+            ?>
+        </div>
+    </div>
+   <?php } } else { ?>
+        <?php $catcollection=$block->getExtraFeeCategoryCollection();
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $cookieManager = $objectManager->get('Magento\Framework\Stdlib\CookieManagerInterface');
+        if (!empty($catcollection)) {
+            $categories = $product->getCategoryIds();
+            $catDis=0;?>
+    <div class="extrafee_prd">
+        <div class="fee_option">
+            <?php foreach ($catcollection as $fee) {
+                    $feesData=$fee->getData();
+                    $catIds = explode(',', $feesData['category_ids']);
+                    $c = array_intersect($categories, $catIds);
+                if (!empty($c)) { ?> 
+                    <?php if ($catDis==0) {?>
+                        <div class="title"><h3><?= __($block->getCategoryTitle()); ?> </h3></div>
+                    <?php } $catDis++; ?>
+                    <div class="option">
+                    <?php if ($feesData['is_mandatory']=='Yes') { ?>
+                        <label for="<?= __($feesData['feesname']) ?>">
+                        <input type="checkbox" checked="checked" disabled="disabled" name="feesname[]" value="<?= $feesData['id']; ?>" />
+                        <span><?php if ($feesData['type']=='Percentage') { echo $feesData['amount']."%" ;
+                              } else { echo $priceHelper->currency($feesData['amount'], true, false);} ?></span>
+                        <span><?= " ".__($feesData['feesname']) ?></span>
+                        </label><br>
+                        <input type="hidden" name="feesname[]" value="<?= $feesData['id']; ?>">
+                        <?php
+                    } else { ?>    
+                    <input type="checkbox" name="feesname[]" value="<?= $feesData['id'] ?>"> <span> <?php if ($feesData['type']=='Percentage') { echo $feesData['amount']."%" ;
+                                                                    } else { echo $priceHelper->currency($feesData['amount'], true, false);}
+                                                                    echo " ".__($feesData['feesname']); ?></span> <br>
+                    
+                <?php } ?> </div>
+            <?php } }
+            ?>
+        </div>
+    </div>
+        <?php } $ExtraFeeList=$product->getResource()->getAttribute('extrafeelist')->getFrontend()->getValue($product); ?>
+        <?php if (!empty($ExtraFeeList)) { ?>
+    <div class="extrafee_prd">
+        <div class="title"><h3><?= __($block->getProductTitle()); ?> </h3></div>
+        <div class="fee_option">
+            <?php $collection=$block->getExtraFeeProductCollection();
+            foreach ($collection as $fee) { //if(strpos($ExtraFeeList,$fee['id']) !== false) { ?> <div class="option">
+                    <?php if ($fee['is_mandatory']=='Yes') { ?>
+                        <label for="<?= " ".__($fee['feesname']) ?>">
+                        <input type="checkbox" checked="checked" disabled="disabled" name="feesname[]" value="<?= $fee['id']; ?>" />
+                        <span><?php if ($fee['type']=='Percentage') { echo $fee['amount']."%" ;
+                              } else {echo $priceHelper->currency($fee['amount'], true, false);} ?></span>
+                        <span><?= " ".__($fee['feesname']) ?></span>
+                        </label><br>
+                        <input type="hidden" name="feesname[]" value="<?= $fee['id']; ?>">
+                        <?php
+                    } else { ?>    
+                    <input type="checkbox" name="feesname[]" value="<?= $fee['id'] ?>"> <span> <?php if ($fee['type']=='Percentage') { echo $fee['amount']."%" ;
+                                                                    } else {echo $priceHelper->currency($fee['amount'], true, false);}
+                                                                    echo " ".__($fee['feesname']); ?></span> <br>
+                <?php } ?> </div>
+                <?php //}
+            }
+            ?>
+        </div>
+    </div>
+<?php } }
+    ?>
+ <!--get simpleproduct id based on selected attribute !-->
+ <input type="hidden" name="productid" id="simpleproductid" value="">
+<script type="text/javascript">
+requirejs(['jquery','underscore'], function(jQuery,_){
+    jQuery(window).load(function(){
+        jQuery( ".product-options-wrapper div" ).click(function() {
+            selpro();
+        });
+    });
+    function selpro () {
+        var selected_options = {};
+        jQuery('div.swatch-attribute').each(function(k,v){
+            var attribute_id    = jQuery(v).attr('data-attribute-id');
+            var option_selected = jQuery(v).attr('data-option-selected');
+            //console.log(attribute_id, option_selected);
+            if(!attribute_id || !option_selected){ return;}
+            selected_options[attribute_id] = option_selected;
+        });
+
+        var product_id_index = jQuery('[data-role=swatch-options]').data('mageSwatchRenderer').options.jsonConfig.index;
+        var found_ids = [];
+        jQuery.each(product_id_index, function(product_id,attributes){
+            var productIsSelected = function(attributes, selected_options){
+                return _.isEqual(attributes, selected_options);
+            }
+            if(productIsSelected(attributes, selected_options)){
+                found_ids.push(product_id);
+            } 
+        });
+        jQuery("#simpleproductid").val(found_ids);
+
+    }
+});
+</script>

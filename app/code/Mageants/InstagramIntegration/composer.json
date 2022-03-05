@@ -1,0 +1,20 @@
+{
+  "name": "mageants/module-instagram-integration",
+  "description": "Magento 2 Instagram Integration Extension",
+  "type": "magento2-module",
+    "version": "2.0.2",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+        "magento/module-catalog": "^103.0",
+        "magento/framework": "^100.1||^101.0||^102.0"
+    },
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Mageants\\InstagramIntegration\\": ""
+        }
+    }
+}

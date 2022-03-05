@@ -1,0 +1,34 @@
+<!-- 
+/**
+ * @category Mageants DeleteAccount
+ * @package Mageants_DeleteAccount
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ -->
+ 
+<?php 
+
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $enable = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface')->getValue('deleteaccount/general/enable');
+    if($enable == 1): 
+
+?>
+<div class="block-content">
+	<div class="box box-information">	
+		<form class="form" action="<?php /* @escapeNotVerified */ echo $block->getFormAction(); ?>" method="post" id="deleteaccount-validate-detail" data-hasrequired="* Required Fields" data-mage-init='{"validation":{}}' >
+			<div class="field name required">
+				<div>
+					<input type="checkbox" class="input-checkbox" name="delconfirm" id="delconfirm" data-validate="{required:true}" /><label><?= /* @escapeNotVerified */ __('Delete My Account')?><span class="customerr">*</span></label>
+				</div>
+				    <div class="action button-alignment">
+					    <div class="actions">
+					        <button class="action submit primary" title="Delete Account" type="submit">
+					            <span><?= /* @escapeNotVerified */ __('Submit') ?></span>
+					        </button>
+					    </div>
+				    </div>
+			</div>
+	    </form>
+	</div>
+</div>
+<?php endif;?>

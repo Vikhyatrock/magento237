@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants Productimage
+ * @package Mageants_Productimage
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Mageants\Productimage\Api\Data\GridInterface" type="Mageants\Productimage\Model\Grid" />
+    <virtualType name="Mageants\Productimage\Model\ResourceModel\Grid\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageants_productimage_bycustomer</argument>
+            <argument name="resourceModel" xsi:type="string">Mageants\Productimage\Model\ResourceModel\Grid</argument>
+            <argument name="default_filter" xsi:type="array">
+            <item name="id" xsi:type="string">0</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="grid_record_grid_list_data_source" xsi:type="string">Mageants\Productimage\Model\ResourceModel\Grid\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+     <virtualType name="Mageants\Productimage\GridImageUpload" type="Mageants\Productimage\Model\ImageUploader">
+    <arguments>
+            <argument name="baseTmpPath" xsi:type="string">theme/tmp</argument>
+            <argument name="basePath" xsi:type="string">theme/images</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mageants\Productimage\Controller\Adminhtml\Grid\Upload">
+        <arguments>
+                <argument name="imageUploader" xsi:type="object">Mageants\Productimage\GridImageUpload</argument>
+        </arguments>
+    </type>
+</config>

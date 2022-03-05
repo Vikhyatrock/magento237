@@ -1,0 +1,327 @@
+<?php
+/**
+ * @category Mageants FreeShippingBar
+ * @package Mageants_FreeShippingBar
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+    $getSession = $block->getSession();
+    $getSession->start();
+    $count = $getSession->getData('freeshippingbar_id');
+    $fid = $getSession->getData('fid');
+    $getPriority = 0;
+    $getPosition = 0;
+    $displayFirst = 0;
+    $position = $block->getCollections()->getData();
+    $totalRecord = count($block->getCollections());
+foreach ($block->getCollections() as $collection) {
+    // echo "Template Called 2 ";
+    if ($collection->getId() == $fid) {
+        if ($block->getCurrentDateTime() >= $collection->getFromdate()) {
+            if ($block->getCurrentDateTime() <= $collection->getTodate()) {
+                if ($displayFirst == 0) {
+                    $displayFirst = 1;
+                    $getPosition = $collection->getPosition();
+                    $getPriority = $collection->getPriority();
+                    if ($block->getStoreId() == $collection->getStoreview()) {
+                        if ($collection->getAllowedPage()) {
+                            $currentUrl = $block->getFullUrl();
+                            $fullActionName = $block->getActionName();
+                            $specificPage = $collection->getSpecificPage();
+                            $specificPageUrl = $collection->getSpecificPageUrl();
+                            $specificPages = explode(",", $specificPage);
+                            $specificPagesUrl = explode(",", $specificPageUrl);
+                            foreach ($specificPages as $actionName) {
+                                if ($fullActionName == $actionName) {
+                                    echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                }
+                            }
+                            foreach ($specificPagesUrl as $actionUrl) {
+                                if ($currentUrl == $actionUrl) {
+                                    echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                }
+                            }
+                        } else {
+                            $setView = 0;
+                            $currentUrl = $block->getFullUrl();
+                            $fullActionName = $block->getActionName();
+                            $excludepage = $collection->getExcludePage();
+                            $excludepageUrl = $collection->getExcludePageUrl();
+                            if (!empty($excludepage) || !empty($excludepageUrl)) {
+                                $excludepages = explode(",", $excludepage);
+                                $excludepagesUrl = explode(",", $excludepageUrl);
+                                foreach ($excludepages as $actionName) {
+                                    if ($fullActionName == $actionName) {
+                                        $setView = 1;
+                                    }
+                                }
+                                foreach ($excludepagesUrl as $actionUrl) {
+                                    if ($currentUrl == $actionUrl) {
+                                        $setView = 1;
+                                    }
+                                }
+                                if ($setView == 0) {
+                                    echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                }
+                            } else {
+                                 echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                            }
+                        }
+                    }
+                             
+                    if ($collection->getStoreview() == 0) {
+                        if ($collection->getAllowedPage()) {
+                            $currentUrl = $block->getFullUrl();
+                            $fullActionName = $block->getActionName();
+                            $specificPage = $collection->getSpecificPage();
+                            $specificPageUrl = $collection->getSpecificPageUrl();
+                            $specificPages = explode(",", $specificPage);
+                            $specificPagesUrl = explode(",", $specificPageUrl);
+                            foreach ($specificPages as $actionName) {
+                                if ($fullActionName == $actionName) {
+                                      echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                }
+                            }
+                            foreach ($specificPagesUrl as $actionUrl) {
+                                if ($currentUrl == $actionUrl) {
+                                      
+                                      echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                }
+                            }
+                        } else {
+                            $setView = 0;
+                            $currentUrl = $block->getFullUrl();
+                            $fullActionName = $block->getActionName();
+                            $excludepage = $collection->getExcludePage();
+                            $excludepageUrl = $collection->getExcludePageUrl();
+                            if (!empty($excludepage) || !empty($excludepageUrl)) {
+                                $excludepages = explode(",", $excludepage);
+                                $excludepagesUrl = explode(",", $excludepageUrl);
+                                foreach ($excludepages as $actionName) {
+                                    if ($fullActionName == $actionName) {
+                                        $setView = 1;
+                                    }
+                                }
+                                foreach ($excludepagesUrl as $actionUrl) {
+                                    if ($currentUrl == $actionUrl) {
+                                        $setView = 1;
+                                    }
+                                }
+                                if ($setView == 0) {
+                                    echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                }
+                            } else {
+                                echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                            }
+                        }
+                    }
+                } else {
+                    if ($collection->getPosition() == $getPosition) {
+                        if ($collection->getPriority() > $getPriority) {
+                            if ($block->getStoreId() == $collection->getStoreview()) {
+                                if ($collection->getAllowedPage()) {
+                                      $currentUrl = $block->getFullUrl();
+                                      $fullActionName = $block->getActionName();
+                                      $specificPage = $collection->getSpecificPage();
+                                      $specificPageUrl = $collection->getSpecificPageUrl();
+                                      $specificPages = explode(",", $specificPage);
+                                      $specificPagesUrl = explode(",", $specificPageUrl);
+                                    foreach ($specificPages as $actionName) {
+                                        if ($fullActionName == $actionName) {
+                                            echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                        }
+                                    }
+                                    foreach ($specificPagesUrl as $actionUrl) {
+                                        if ($currentUrl == $actionUrl) {
+                                          
+                                            echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                        }
+                                    }
+                                } else {
+                                    $setView = 0;
+                                    $currentUrl = $block->getFullUrl();
+                                    $fullActionName = $block->getActionName();
+                                    $excludepage = $collection->getExcludePage();
+                                    $excludepageUrl = $collection->getExcludePageUrl();
+                                    if (!empty($excludepage) || !empty($excludepageUrl)) {
+                                           $excludepages = explode(",", $excludepage);
+                                           $excludepagesUrl = explode(",", $excludepageUrl);
+                                        foreach ($excludepages as $actionName) {
+                                            if ($fullActionName == $actionName) {
+                                                 $setView = 1;
+                                            }
+                                        }
+                                        foreach ($excludepagesUrl as $actionUrl) {
+                                            if ($currentUrl == $actionUrl) {
+                                                $setView = 1;
+                                            }
+                                        }
+                                        if ($setView == 0) {
+                                             echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                        }
+                                    } else {
+                                        echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                    }
+                                }
+                            }
+                                     
+                            if ($collection->getStoreview() == 0) {
+                                if ($collection->getAllowedPage()) {
+                                     $currentUrl = $block->getFullUrl();
+                                     $fullActionName = $block->getActionName();
+                                     $specificPage = $collection->getSpecificPage();
+                                     $specificPageUrl = $collection->getSpecificPageUrl();
+                                     $specificPages = explode(",", $specificPage);
+                                     $specificPagesUrl = explode(",", $specificPageUrl);
+                                    foreach ($specificPages as $actionName) {
+                                        if ($fullActionName == $actionName) {
+                                               echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                        }
+                                    }
+                                    foreach ($specificPagesUrl as $actionUrl) {
+                                        if ($currentUrl == $actionUrl) {
+                                              
+                                               echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                        }
+                                    }
+                                } else {
+                                       $setView = 0;
+                                       $currentUrl = $block->getFullUrl();
+                                       $fullActionName = $block->getActionName();
+                                       $excludepage = $collection->getExcludePage();
+                                       $excludepageUrl = $collection->getExcludePageUrl();
+                                    if (!empty($excludepage) || !empty($excludepageUrl)) {
+                                        $excludepages = explode(",", $excludepage);
+                                        $excludepagesUrl = explode(",", $excludepageUrl);
+                                        foreach ($excludepages as $actionName) {
+                                            if ($fullActionName == $actionName) {
+                                                $setView = 1;
+                                            }
+                                        }
+                                        foreach ($excludepagesUrl as $actionUrl) {
+                                            if ($currentUrl == $actionUrl) {
+                                                $setView = 1;
+                                            }
+                                        }
+                                        if ($setView == 0) {
+                                             echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                        }
+                                    } else {
+                                        echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ($block->getStoreId() == $collection->getStoreview()) {
+                            if ($collection->getAllowedPage()) {
+                                      $currentUrl = $block->getFullUrl();
+                                      $fullActionName = $block->getActionName();
+                                      $specificPage = $collection->getSpecificPage();
+                                      $specificPageUrl = $collection->getSpecificPageUrl();
+                                      $specificPages = explode(",", $specificPage);
+                                      $specificPagesUrl = explode(",", $specificPageUrl);
+                                foreach ($specificPages as $actionName) {
+                                    if ($fullActionName == $actionName) {
+                                            echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                    }
+                                }
+                                foreach ($specificPagesUrl as $actionUrl) {
+                                    if ($currentUrl == $actionUrl) {
+                                          
+                                            echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                    }
+                                }
+                            } else {
+                                          $setView = 0;
+                                          $currentUrl = $block->getFullUrl();
+                                          $fullActionName = $block->getActionName();
+                                          $excludepage = $collection->getExcludePage();
+                                          $excludepageUrl = $collection->getExcludePageUrl();
+                                if (!empty($excludepage) || !empty($excludepageUrl)) {
+                                    $excludepages = explode(",", $excludepage);
+                                    $excludepagesUrl = explode(",", $excludepageUrl);
+                                    foreach ($excludepages as $actionName) {
+                                        if ($fullActionName == $actionName) {
+                                            $setView = 1;
+                                        }
+                                    }
+                                    foreach ($excludepagesUrl as $actionUrl) {
+                                        if ($currentUrl == $actionUrl) {
+                                                    $setView = 1;
+                                        }
+                                    }
+                                    if ($setView == 0) {
+                                          echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                    }
+                                } else {
+                                    echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                }
+                            }
+                        }
+                                     
+                        if ($collection->getStoreview() == 0) {
+                            if ($collection->getAllowedPage()) {
+                                      $currentUrl = $block->getFullUrl();
+                                      $fullActionName = $block->getActionName();
+                                      $specificPage = $collection->getSpecificPage();
+                                      $specificPageUrl = $collection->getSpecificPageUrl();
+                                      $specificPages = explode(",", $specificPage);
+                                      $specificPagesUrl = explode(",", $specificPageUrl);
+                                foreach ($specificPages as $actionName) {
+                                    if ($fullActionName == $actionName) {
+                                               echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                    }
+                                }
+                                foreach ($specificPagesUrl as $actionUrl) {
+                                    if ($currentUrl == $actionUrl) {
+                                                echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                    }
+                                }
+                            } else {
+                                           $setView = 0;
+                                           $currentUrl = $block->getFullUrl();
+                                           $fullActionName = $block->getActionName();
+                                           $excludepage = $collection->getExcludePage();
+                                           $excludepageUrl = $collection->getExcludePageUrl();
+                                if (!empty($excludepage) || !empty($excludepageUrl)) {
+                                    $excludepages = explode(",", $excludepage);
+                                    $excludepagesUrl = explode(",", $excludepageUrl);
+                                    foreach ($excludepages as $actionName) {
+                                        if ($fullActionName == $actionName) {
+                                            $setView = 1;
+                                        }
+                                    }
+                                    foreach ($excludepagesUrl as $actionUrl) {
+                                        if ($currentUrl == $actionUrl) {
+                                            $setView = 1;
+                                        }
+                                    }
+                                    if ($setView == 0) {
+                                        echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                    }
+                                } else {
+                                    echo $block->freeshippingbarCode($collection->getId(), $collection->getGoal(), $collection->getFirstMessage(), $collection->getBelowGoalMessage(), $collection->getAchiveGoalMessage(), $block->getCartProductPrice(), $collection->getGoalTextColor(), $block->getCurrencySymbol(), $collection->getBarBackgroundColor(), $collection->getBarTextColor(), $collection->getBarBackgroundOpacity(), $collection->getBarLinkColor(), $collection->getGoalTextColor(), $collection->getFontSize(), $collection->getFonts(), $collection->getClickable(), $collection->getLinkUrl(), $collection->getOpenInNewPage(), $collection->getImage(), $collection->getPosition(), $collection->getSelectedProducts());
+                                }
+                            }
+                        }
+                    }
+                }
+            } else { $block->setStatus($collection->getId()); }
+        }
+    }
+}
+if (!empty($position[0]['id'])) {
+    if ($position[0]['id'] == 1) {
+        if ($count < ($totalRecord - 1)) {
+            $count++;
+            return $getSession->setFreeShippingBarId($count) and $getSession->setFid($position[$count]['id']);
+        }
+    } else {
+        if ($count < ($totalRecord - 1)) {
+              $count++;
+              return $getSession->setFreeShippingBarId($count) and $getSession->setFid($position[$count]['id']);
+        }
+    }
+}
+?>

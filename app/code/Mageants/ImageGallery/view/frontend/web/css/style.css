@@ -1,0 +1,105 @@
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0.7;
+	z-index: 9999;
+}
+.displayval
+{
+	display:none !important;
+}
+.uniq img{
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    height: 240px !important;
+}
+
+.uniq{
+    display: inline-block; 
+    border: 1px black solid;
+    padding: 2px;  
+}
+
+.uniq img:hover {
+    opacity: 0.5;
+    filter: alpha(opacity=50); 
+}
+.uniq h2{
+background: lightgrey;
+margin: 0px;
+padding: 10px;
+text-align: center;
+}
+.page-title span h3
+{
+	text-align: center;
+	padding: 1%;
+	background: black;
+	color: white;
+}
+
+.gallery-action {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 100%;
+	margin: 0 0 10px;
+}
+.gallery-action a {
+	display: block;
+	background: #000;
+	color: #fff;
+	padding: 4px 10px;
+	border-radius: 5px;
+	text-decoration: none;
+	cursor: pointer;
+}
+.gallery-action a+a {
+	margin-left: 10px;
+}
+.video-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+.video-gallery span.error-msg {
+    display: block;
+    width: 100%;
+    padding: 0 15px;
+}
+.video-gallery .video-list {
+    width: 22.63%;
+    padding: 0 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 0 15px;
+}
+.video-gallery .video-list a {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.video-gallery .video-list a video {
+    max-height: 100%;
+    height: 150px;
+    max-width: 100%;
+    width: 100%;
+}
+.video-gallery .video-list a span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #000;
+    margin: 10px 0 0;
+    text-decoration: none;
+}

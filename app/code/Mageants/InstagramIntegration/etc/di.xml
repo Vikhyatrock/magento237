@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+ <!-- 
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="manageimage_list_data_source" xsi:type="string">Mageants\InstagramIntegration\Model\ResourceModel\Instagram\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mageants\InstagramIntegration\Model\ResourceModel\Instagram\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">instagram_integration_data</argument>
+            <argument name="eventPrefix" xsi:type="string">mageants_instagramintegration_instagram_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">instagram_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Mageants\InstagramIntegration\Model\ResourceModel\Instagram</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MenuGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mageants\InstagramIntegration\Model\ResourceModel\Instagram\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">instagram_integration_data</argument>
+            <argument name="resourceModel" xsi:type="string">Mageants\InstagramIntegration\Model\ResourceModel\Instagram</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MenuGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Mageants\InstagramIntegration\Model\ResourceModel\Instagram\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MenuGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Config\Model\Config">
+        <plugin name="admin_system_config_save_plugin" type="Mageants\InstagramIntegration\Plugin\ConfigPlugin" sortOrder="1"/>
+    </type>
+</config>

@@ -1,0 +1,8 @@
+<?php
+$preorder_note_in_cart = $block->getNoteForPreorderIncart();
+$orderid = $this->getRequest()->getParam('order_id');
+$preorder_item = $block->getOrderDetailsById($orderid);
+if ($preorder_item == 1) { ?>
+    <div><?php echo $preorder_note_in_cart; ?></div>
+<?php }
+?>

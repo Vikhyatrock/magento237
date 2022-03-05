@@ -1,0 +1,169 @@
+<?php 
+/**
+ * @category  Mageants BannerSlider
+ * @package   Mageants_BannerSlider
+ * @copyright Copyright (c) 2017 Mageants
+ * @author    Mageants Team <support@Mageants.com>
+ */
+$helper = $this->getBannerHelper();
+?>
+<?php if($helper->isExtentionEnable()): ?>
+
+	<?php 
+	$slider = $this->getSlider();
+	$imageHelper = $this->getBannerImageHelper();
+	
+	if($slider && $slider->getId()): 
+	
+	$slides = $this->getSlides();
+	$unser_setting = $helper->unserializeSetting($slider->getSetting());
+	$setting = $unser_setting['setting'];
+	$titleFontSize = "75px";
+
+	// Slider Settings
+	$mode = $helper->getSliderMode();
+	$speed = $setting['speed'];
+	$auto = $setting['autoplay']==1?'true':'false';
+	$pager = $setting['show_navigation_bullets']==1?'true':'false';
+	$slideWidth = $setting['width'];
+	if(!empty($slideWidth)) {
+		$slideWidth = $setting['width'];
+	}else{
+		$slideWidth = '1500';
+	}	
+	$controls = $setting['show_navigation_arrows']==1?'true':'false';
+	$keyboardEnabled = $setting['keyboard']==1?'true':'false';
+	$pause = $setting['interval'];
+	$adaptive = $setting['adaptive_height']==1?'true':'false';
+	if ($adaptive == true) {
+		$adaptive = $setting['adaptive_height'];
+	}
+	
+	// $bgColor = "";
+	// $bgOp = "";
+	$top = "";
+	$right = "";
+	$bottom = "";
+	$left = "";
+	$buttonText = "";
+	$buttonUrl = "#";
+	$bgColorButton = "";
+	$fontColorButton = "";
+	?>
+	<div class="bannerwrapper">
+		<div class="carousel">		
+				<?php foreach($slides as $slide): ?>
+					<?php $slidesetting = $slide['setting'];
+					/*if(!empty($slidesetting['background_color'])){
+						$bgColor = '#'.$slidesetting['background_color'];
+					}
+					if(!empty($slidesetting['background_opacity'])){
+						$bgOp = $slidesetting['background_opacity'];
+					}*/
+					if(!empty($slidesetting['top'])){
+						$top = $slidesetting['top'];
+					}
+					if(!empty($slidesetting['right'])){
+						$right = $slidesetting['right'];
+					}
+					if(!empty($slidesetting['bottom'])){
+						$bottom = $slidesetting['bottom'];
+					}
+					if(!empty($slidesetting['left'])){
+						$left = $slidesetting['left'];
+					}
+					if(!empty($slidesetting['button_text'])){
+						$buttonText = $slidesetting['button_text'];
+					}
+					if(!empty($slidesetting['button_url'])){
+						$buttonUrl = $slidesetting['button_url'];
+					}
+					if(!empty($slidesetting['bg_color_button'])){
+						$bgColorButton = '#'.$slidesetting['bg_color_button'];
+					}
+					if(!empty($slidesetting['font_color_button'])){
+						$fontColorButton = '#'.$slidesetting['font_color_button'];
+					}
+					if(!empty($slide['title_font_size'])){
+						$titleFontSize = $slide['title_font_size'].'px';
+					}
+					?>							
+					<div class="slide-item" style="visibility: hidden;">
+						<div class="carousel-img">
+							<?php if($slide['image']):?><img src="<?php echo $slide['image']?>"><?php endif?>
+						</div>
+						<div class="slide-item-details" 
+						style="top: <?php echo $top; ?>;
+							   right: <?php echo $right; ?>;
+							   bottom: <?php echo $bottom; ?>;
+							   left: <?php echo $left; ?>;
+							   ">
+							<h1 style="font-size: <?php echo $titleFontSize; ?>">
+								<?php echo $slide['title']?>
+							</h1>
+							<blockquote><?php echo $slide['content']?></blockquote>
+							<?php if (!empty($buttonText)) {  ?>
+							<a class="action primary" href="<?php echo $buttonUrl; ?>" 
+								target="_blank" 
+								style="background-color: <?php echo $bgColorButton; ?>; 
+										color:<?php echo $fontColorButton; ?>;">
+								<?php echo $buttonText; ?>
+							</a>
+							<?php } ?>
+						</div>
+					</div>
+				<?php
+				 endforeach ?>		
+
+		</div>
+		<script src="https://use.fontawesome.com/0637a4aa14.js"></script>	
+		<script type="text/javascript">
+			require(['jquery','mageants/bannerslider'],function($){
+				$(function() {					
+				    slider  = $('.carousel').bxSlider({
+				      <?php if (!empty($mode)) { ?>
+				      mode: "<?php echo $mode ?>",
+				  	  <?php } else { ?> 
+				  	  mode: "fade",
+				  	  <?php } ?>
+				      captions: true,
+				      speed: <?php if($keyboardEnabled == 'false') { echo $speed; }else { echo"0"; }  ?>,
+				      auto:  <?php echo $auto ?>,
+					  pager: <?php echo $pager?>,
+					  slideWidth: <?php echo $slideWidth ?>,
+					  controls:<?php echo $controls ?>, 
+					  keyboardEnabled: <?php echo $keyboardEnabled ?>,
+					  pause:<?php echo $pause ?>,
+					  nextText: '<i class="fa fa-chevron-right"></i>',
+					  prevText: '<i class="fa fa-chevron-left"></i>',
+					  adaptiveHeight: <?php echo $adaptive; ?>,
+					  touchEnabled: false,
+					  onSliderLoad: function(){
+				        $(".slide-item").css("visibility", "visible");
+				      }
+				    });					
+                    
+                    
+                    /*$(window).resize(function(){
+                        sliderArrowHeight();
+                    });
+                    $(window).load(function(){
+                        sliderArrowHeight();
+                    });
+                    
+                    function sliderArrowHeight() {
+                        if ($(window).width() < 767) {
+                            var slideImgHeight = jQuery('.slide-item .carousel-img').outerHeight();
+                            jQuery('.bannerwrapper .bx-wrapper .bx-controls-direction a').css('top',slideImgHeight / 2);    
+                        }else {
+                            jQuery('.bannerwrapper .bx-wrapper .bx-controls-direction a').css('top','50%');    
+                        }
+                    }*/
+                    
+				});
+			});
+			 
+		</script>		
+	</div>
+	<?php endif?>
+<?php endif?>

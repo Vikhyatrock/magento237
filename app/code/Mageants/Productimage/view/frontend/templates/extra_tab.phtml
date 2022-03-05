@@ -1,0 +1,523 @@
+<?php
+/**
+ * @category Mageants Productimage
+ * @package Mageants_Productimage
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+?>
+<div class="title">
+    <span>
+        <em>
+            <strong><?= $block->getCustomTitle(); ?></strong>
+        </em>
+    </span>
+</div>
+<?php
+if ($currentProduct = $block->getCurrentProduct()) {
+    $productsku = $currentProduct->getSku();
+}
+?> 
+    <div class="large-12 columns">
+        <div class="owl-carousel owl-theme">
+<?php
+$imagecollection = $block->getImageCollection();
+foreach ($imagecollection as $imageName) {
+    if ($imageName->getProductSKU() == $productsku):
+        ?>          <div class="item galdec">
+            <a href="<?= $block->getMediaUrl().$imageName->getImage();?>" 
+                data-fancybox="images" 
+                data-width="<?= $block->gethimageZoom(); ?>" 
+                data-height="<?= $block->getvimageZoom(); ?>">
+                <img class="img-responsive gal" src="<?= $block->getMediaUrl().$imageName->getImage();?>" />
+            </a>
+            </div>
+        <?php
+    endif;
+}
+?>
+        </div>
+    </div>
+<script type="text/javascript">
+    (function  () { 
+        require(["jquery", "owlCarousel", "fancyBox"],function($) {
+            $(document).ready(function() {
+              var owl = $('.owl-carousel');
+              owl.owlCarousel({
+                autoplay: true,
+                margin: 30,
+                <?php if ($block->getNavigationOptions()):?>
+                nav: true,
+                dots: false,
+                <?php else: ?>
+                nav: false,
+                dots: true,
+                <?php endif; ?>
+                loop: false,
+                center: false,
+                lazyLoad:true,
+                responsive: {
+                  0: {
+                    items: 1
+                  },
+                  600: {
+                    items: 3
+                  },
+                  1000: {
+                    items: <?= $block->getimageonSlide(); ?>
+                  }
+                }
+              });
+            });
+            $(document).ready(function() {
+              $('.galdec').css("width", "<?= $block->gethimageDimenstion(); ?>");
+              $('.galdec').css("height", "<?= $block->getvimageDimenstion(); ?>");
+              $('.gal').css("width", "<?= $block->gethimageDimenstion(); ?>");
+              $('.gal').css("height", "<?= $block->getvimageDimenstion(); ?>");
+              $('[data-fancybox="images"]').fancybox({
+                protect: true,
+                slideShow : {
+                    autoStart : false,
+                    speed : "<?= $block->getslideSpeed(); ?>"
+                  },
+                   afterLoad : function(instance, current) {
+                    var pixelRatio = window.devicePixelRatio || 1;
+
+                    if ( pixelRatio > 1.5 ) {
+                        current.width  = current.width  / pixelRatio;
+                        current.height = current.height / pixelRatio;
+                    }
+                }
+                });
+            });
+        });
+    })();
+</script>
+<style type="text/css">
+    .owl-theme .owl-nav{
+        position: inherit;
+        margin-bottom: 16px;
+    }
+    form#form-image {
+        margin-top: 46px;
+    }
+</style>
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $customer = $objectManager->create('\Magento\Customer\Model\Session');
+    
+    // echo $block->allowGuest();
+    // echo $customer->isLoggedIn();
+    
+if ($block->allowGuest() == 1) { ?>
+        <form id="form-image" method="post" enctype="multipart/form-data" action="<?= /* @escapeNotVerified */ $block->getFormAction(); ?>"  data-hasrequired="* Required Fields" data-mage-init='{"validation":{}}'>
+            <div class="fieldset field name required">
+                <h2 class="customlegend"><?= ('Upload Images')?></h2>
+                <ul class="form-list" style="list-style-type:none;">
+                    <li class="fields">
+                        <div class="customer-name">
+                        <div class="field name-firstname">
+                            <div id="errormessage" class="message error error" style="display: none;" >
+                                    <div>
+                                    <?= __("You are not allowed to upload more than ".$block->getimageuploadLimit()." images at once!") ?>
+                                    </div>
+                            </div>
+                            <input type="hidden" name="productname" value="<?= $currentProduct->getName();?>">
+                            <input type="hidden" name="productsku" value="<?= $productsku ; ?>">
+                            <label class="required" for="firstname"><?= ('Your Name')?></label><em> *</em>
+                            <div class="input-box">
+                            <input type="text" class="input-text required-entry inputalign" maxlength="255" title="Name" 
+                            <?php if ($block->isCustomerLogin()): ?>
+                                value="<?= $block->getCustomerName(); ?>"
+                            <?php else: ?>
+                                value=""
+                            <?php endif; ?>
+                            name="name" id="image_name" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <div class="field email">
+                            <label class="required" for="email"><?= ('Your Email')?></label>
+                            <?php if ($block->emailRequired()): ?>
+                                <em> *</em>
+                            <?php endif; ?>
+                            <div class="input-box">
+                            <input type="email" 
+                            <?php if ($block->emailRequired()): ?>
+                            class="input-text required-entry inputalign"
+                            <?php else: ?>
+                            class="input-text inputalign"
+                            <?php endif; ?>
+                            title="Email-Id" name="email" id="image_email"
+                            <?php if ($block->isCustomerLogin()): ?>
+                                value="<?= $block->getCustomerEmail(); ?>"
+                            <?php else: ?>
+                                value=""
+                            <?php endif; ?>
+                            <?php if ($block->emailRequired()): ?> 
+                            data-validate="{required:true}"
+                            <?php endif; ?>
+                            >
+                            </div>
+                        </div>
+                        <div class="field"> 
+                            <div class="input-box" id="control">
+                            <div class="setlayout">
+                                <label class="required" for="images"><?= ('Choose Image(jpg, jpeg, png)')?></label><em> *</em>
+                                <label for="image" class="browseimage">
+                                    <img src="<?= $block->getViewFileUrl('Mageants_Productimage::images/uploadIcon.png'); ?>" 
+                                    class="uploadimage" />
+                                </label>
+                                <span class="hideonimage"><strong>Choose Image</strong></span>
+                                <img id="showimg" class="imgtaghide" height="50" width="50"/>
+                                <input type="file" class="input-file required-entry errorspace"  title="Choose Image" value="" name="image[]" id="image" data-validate="{required:true}">
+                                <br/><br/>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <div id="action">
+                             <button type="button" class="action primary custombutton" id="add" onclick="addField(this)"><span>+ Add More Image</span></button>   
+                            </div>
+                            <button class="action primary custombutton" title="Submit" type="submit"><span><span><?= ('Upload')?></span></span></button>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+        <script type="text/javascript">
+                            var i = 1;
+                            var counter = 1;
+                            function addField(img) {
+                                var img_check = document.getElementById('image').value;
+                                if(counter < <?= $block->getimageuploadLimit(); ?> && img_check != ""){
+                                    img1 = document.getElementById('control');
+                                    img = document.createElement("div");
+                                    img.classList.add("setlayout");
+                                    img.id = "setlayout" + i;
+                                    img1.appendChild(img); 
+                                    var br = document.createElement("br");
+                                    br.id = "br_" + i;
+                                    var label1 = document.createElement("label");
+                                    var lval = document.createTextNode("Choose Image(jpg, jpeg, png)");
+                                    label1.appendChild(lval); 
+                                    img.appendChild(label1);
+                                    var label = document.createElement("label");
+                                    label.htmlFor = "image" + i;
+                                    label.classList.add("browseimage");
+                                    label.classList.add("spacesub");
+                                    var imgs = document.createElement("img");
+                                    imgs.src = "<?= $block->getViewFileUrl('Mageants_Productimage::images/uploadIcon.png'); ?>";
+                                    imgs.classList.add("uploadimage");
+                                    img.appendChild(label);
+                                    label.appendChild(imgs);
+                                    var input = document.createElement("input");
+                                    input.type = "file";
+                                    input.name = "image["+i+"]";
+                                    input.id = "image"+i;
+                                    input.setAttribute("class","input-text opaimg");
+                                    input.accept = "image/*";
+                                    input.setAttribute("onChange", "Imagepop("+i+")");
+                                    img.appendChild(input);
+                                    var span = document.createElement("span");
+                                    span.classList.add("hideonimage" + i);
+                                    var strong = document.createElement("strong");
+                                    var sval = document.createTextNode("Choose Image"); 
+                                    strong.appendChild(sval);
+                                    img.appendChild(span);
+                                    span.appendChild(strong);
+                                    var showimg = document.createElement("img");
+                                    showimg.height = "50";
+                                    showimg.width = "50" ;
+                                    showimg.id = "showimg"+ i ;
+                                    showimg.classList.add("imgtaghide");
+                                    img.appendChild(showimg);
+                                    var btn = document.createElement("button");
+                                    var t = document.createTextNode("x");
+                                    btn.name = "del_btn["+i+"]";
+                                    btn.id = "del_btn_" + i;
+                                    btn.setAttribute("onClick", "deleteField("+i+")");
+                                    btn.classList.add("delbtnmargin");
+                                    btn.appendChild(t);
+                                    img.appendChild(btn);
+                                    img.appendChild(br);
+                                    Imagepop(i);
+                                    i++;
+                                    counter++;
+                                    if (counter == <?= $block->getimageuploadLimit(); ?>) {
+                                         jQuery("#errormessage").css("display","block").delay(4000).fadeOut();
+                                    }
+                                }else{
+                                    jQuery(document).ready(function(){
+                                        Blink();
+                                    });
+                                        function Blink(){
+                                            jQuery('.hideonimage').delay(300).animate({opacity:'0'}, 600).delay(300).animate({opacity:'1'}, 200, function(){
+                                                setTimeout(Blink, 300);
+                                            }).css({'color':'#eb5202'}); 
+                                        }   
+                                }
+                                if (counter >= <?= $block->getimageuploadLimit(); ?>) {
+                                    document.getElementById("add").remove();
+                                }
+                            }
+                            function Imagepop(e){
+                                jQuery('#image' + e).change(function(ele){
+                                    if(ele.target.files[0]){
+                                        jQuery('.hideonimage'+ e).hide();
+                                        var output = document.getElementById('showimg'+ e);
+                                        console.log(output);
+                                        jQuery('#showimg'+ e).addClass("imgtagshow").removeClass("imgtaghide");
+                                        output.src = URL.createObjectURL(ele.target.files[0]);
+                                    }else{
+
+                                        jQuery('#showimg'+ e).removeAttr("src")
+                                        jQuery('#showimg'+ e).addClass("imgtaghide");
+                                        jQuery('#showimg'+ e).removeClass("imgtagshow");
+                                        jQuery('.hideonimage'+ e).show();
+                                    }
+                                });
+                            }
+                            function deleteField(elementid) {
+                                    counter--;
+                                    document.getElementById("setlayout"+ elementid).remove();
+                                    if (counter >= <?= $block->getimageuploadLimit(); ?> - 1) {
+                                        action = document.getElementById('action');
+                                        var actionbutton = document.createElement("button");
+                                        var actionspan = document.createElement("span");
+                                        var actionspanval = document.createTextNode("+ Add More Image");
+                                        actionspan.appendChild(actionspanval);
+                                        actionbutton.classList.add("action");
+                                        actionbutton.classList.add("primary");
+                                        actionbutton.classList.add("custombutton");
+                                        actionbutton.id = "add";
+                                        actionbutton.setAttribute("onClick", "addField(this)");
+                                        actionbutton.appendChild(actionspan);
+                                        action.appendChild(actionbutton);
+                                    }        
+                            }
+                            require(["jquery"], function ($) {
+                                $(document).ready(function(){
+                                    $('#image').change(function(e){
+                                        if(e.target.files[0]){
+                                            var fileName = e.target.files[0].name;
+                                            $('.hideonimage').hide();
+                                            var output = document.getElementById('showimg');
+                                            $("#showimg").addClass("imgtagshow").removeClass("imgtaghide");
+                                            output.src = URL.createObjectURL(e.target.files[0]);
+                                        }else{
+                                            $("#showimg").removeAttr("src")
+                                            $("#showimg").addClass("imgtaghide");
+                                            $("#showimg").removeClass("imgtagshow");
+                                            $('.hideonimage').show();
+                                        }
+                                    });
+                                });
+                            });
+        </script>
+<?php } else { if ($customer->isLoggedIn() == true) { ?>
+        <form id="form-image" method="post" enctype="multipart/form-data" action="<?= /* @escapeNotVerified */ $block->getFormAction(); ?>"  data-hasrequired="* Required Fields" data-mage-init='{"validation":{}}'>
+            <div class="fieldset field name required">
+                <h2 class="customlegend"><?= ('Upload Images')?></h2>
+                <ul class="form-list" style="list-style-type:none;">
+                    <li class="fields">
+                        <div class="customer-name">
+                        <div class="field name-firstname">
+                            <div id="errormessage" class="message error error" style="display: none;" >
+                                    <div>
+                                        <?= __("You are not allowed to upload more than ".$block->getimageuploadLimit()." images at once!") ?>
+                                    </div>
+                            </div>
+                            <input type="hidden" name="productsku" value="<?= $productsku ; ?>">
+                            <label class="required" for="firstname"><?= ('Your Name')?></label><em> *</em>
+                            <div class="input-box">
+                            <input type="text" class="input-text required-entry inputalign" maxlength="255" title="Name" 
+                            <?php if ($block->isCustomerLogin()): ?>
+                                value="<?= $block->getCustomerName(); ?>"
+                            <?php else: ?>
+                                value=""
+                            <?php endif; ?>
+                            name="name" id="image_name" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <div class="field email">
+                            <label class="required" for="email"><?= ('Your Email')?></label>
+                            <?php if ($block->emailRequired()): ?>
+                                <em> *</em>
+                            <?php endif; ?>
+                            <div class="input-box">
+                            <input type="email" 
+                            <?php if ($block->emailRequired()): ?>
+                            class="input-text required-entry inputalign"
+                            <?php else: ?>
+                            class="input-text inputalign"
+                            <?php endif; ?>
+                            title="Email-Id" name="email" id="image_email"
+                            <?php if ($block->isCustomerLogin()): ?>
+                                value="<?= $block->getCustomerEmail(); ?>"
+                            <?php else: ?>
+                                value=""
+                            <?php endif; ?>
+                            <?php if ($block->emailRequired()): ?> 
+                            data-validate="{required:true}"
+                            <?php endif; ?>
+                            >
+                            </div>
+                        </div>
+                        <div class="field"> 
+                            <div class="input-box" id="control">
+                            <div class="setlayout">
+                                <label class="required" for="images"><?= ('Choose Image(jpg, jpeg, png)')?></label><em> *</em>
+                                <label for="image" class="browseimage">
+                                    <img src="<?= $block->getViewFileUrl('Mageants_Productimage::images/uploadIcon.png'); ?>" 
+                                    class="uploadimage" />
+                                </label>
+                                <span class="hideonimage"><strong>Choose Image</strong></span>
+                                <img id="showimg" class="imgtaghide" height="50" width="50"/>
+                                <input type="file" class="input-file required-entry errorspace"  title="Choose Image" value="" name="image[]" id="image" data-validate="{required:true}">
+                                <br/><br/>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <div id="action">
+                             <button type="button" class="action primary custombutton" id="add" onclick="addField(this)"><span>+ Add More Image</span></button>   
+                            </div>
+                            <button class="action primary custombutton" title="Submit" type="submit"><span><span><?= ('Upload')?></span></span></button>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+        <script type="text/javascript">
+                            var i = 1;
+                            var counter = 1;
+                            function addField(img) {
+                                var img_check = document.getElementById('image').value;
+                                if(counter < <?= $block->getimageuploadLimit(); ?> && img_check != ""){
+                                    img1 = document.getElementById('control');
+                                    img = document.createElement("div");
+                                    img.classList.add("setlayout");
+                                    img.id = "setlayout" + i;
+                                    img1.appendChild(img); 
+                                    var br = document.createElement("br");
+                                    br.id = "br_" + i;
+                                    var label1 = document.createElement("label");
+                                    var lval = document.createTextNode("Choose Image(jpg, jpeg, png)");
+                                    label1.appendChild(lval); 
+                                    img.appendChild(label1);
+                                    var label = document.createElement("label");
+                                    label.htmlFor = "image" + i;
+                                    label.classList.add("browseimage");
+                                    label.classList.add("spacesub");
+                                    var imgs = document.createElement("img");
+                                    imgs.src = "<?= $block->getViewFileUrl('Mageants_Productimage::images/uploadIcon.png'); ?>";
+                                    imgs.classList.add("uploadimage");
+                                    img.appendChild(label);
+                                    label.appendChild(imgs);
+                                    var input = document.createElement("input");
+                                    input.type = "file";
+                                    input.name = "image["+i+"]";
+                                    input.id = "image"+i;
+                                    input.setAttribute("class","input-text opaimg");
+                                    input.accept = "image/*";
+                                    input.setAttribute("onChange", "Imagepop("+i+")");
+                                    img.appendChild(input);
+                                    var span = document.createElement("span");
+                                    span.classList.add("hideonimage" + i);
+                                    var strong = document.createElement("strong");
+                                    var sval = document.createTextNode("Choose Image"); 
+                                    strong.appendChild(sval);
+                                    img.appendChild(span);
+                                    span.appendChild(strong);
+                                    var showimg = document.createElement("img");
+                                    showimg.height = "50";
+                                    showimg.width = "50" ;
+                                    showimg.id = "showimg"+ i ;
+                                    showimg.classList.add("imgtaghide");
+                                    img.appendChild(showimg);
+                                    var btn = document.createElement("button");
+                                    var t = document.createTextNode("x");
+                                    btn.name = "del_btn["+i+"]";
+                                    btn.id = "del_btn_" + i;
+                                    btn.setAttribute("onClick", "deleteField("+i+")");
+                                    btn.classList.add("delbtnmargin");
+                                    btn.appendChild(t);
+                                    img.appendChild(btn);
+                                    img.appendChild(br);
+                                    Imagepop(i);
+                                    i++;
+                                    counter++;
+                                    if (counter == <?= $block->getimageuploadLimit(); ?>) {
+                                         jQuery("#errormessage").css("display","block").delay(4000).fadeOut();
+                                    }
+                                }else{
+                                    jQuery(document).ready(function(){
+                                        Blink();
+                                    });
+                                        function Blink(){
+                                            jQuery('.hideonimage').delay(300).animate({opacity:'0'}, 600).delay(300).animate({opacity:'1'}, 200, function(){
+                                                setTimeout(Blink, 300);
+                                            }).css({'color':'#eb5202'}); 
+                                        }   
+                                }
+                                if (counter >= <?= $block->getimageuploadLimit(); ?>) {
+                                    document.getElementById("add").remove();
+                                }
+                            }
+                            function Imagepop(e){
+                                jQuery('#image' + e).change(function(ele){
+                                    if(ele.target.files[0]){
+                                        jQuery('.hideonimage'+ e).hide();
+                                        var output = document.getElementById('showimg'+ e);
+                                        console.log(output);
+                                        jQuery('#showimg'+ e).addClass("imgtagshow").removeClass("imgtaghide");
+                                        output.src = URL.createObjectURL(ele.target.files[0]);
+                                    }else{
+
+                                        jQuery('#showimg'+ e).removeAttr("src")
+                                        jQuery('#showimg'+ e).addClass("imgtaghide");
+                                        jQuery('#showimg'+ e).removeClass("imgtagshow");
+                                        jQuery('.hideonimage'+ e).show();
+                                    }
+                                });
+                            }
+                            function deleteField(elementid) {
+                                    counter--;
+                                    document.getElementById("setlayout"+ elementid).remove();
+                                    if (counter >= <?= $block->getimageuploadLimit(); ?> - 1) {
+                                        action = document.getElementById('action');
+                                        var actionbutton = document.createElement("button");
+                                        var actionspan = document.createElement("span");
+                                        var actionspanval = document.createTextNode("+ Add More Image");
+                                        actionspan.appendChild(actionspanval);
+                                        actionbutton.classList.add("action");
+                                        actionbutton.classList.add("primary");
+                                        actionbutton.classList.add("custombutton");
+                                        actionbutton.id = "add";
+                                        actionbutton.setAttribute("onClick", "addField(this)");
+                                        actionbutton.appendChild(actionspan);
+                                        action.appendChild(actionbutton);
+                                    }        
+                            }
+                            require(["jquery"], function ($) {
+                                $(document).ready(function(){
+                                    $('#image').change(function(e){
+                                        if(e.target.files[0]){
+                                            var fileName = e.target.files[0].name;
+                                            $('.hideonimage').hide();
+                                            var output = document.getElementById('showimg');
+                                            $("#showimg").addClass("imgtagshow").removeClass("imgtaghide");
+                                            output.src = URL.createObjectURL(e.target.files[0]);
+                                        }else{
+                                            $("#showimg").removeAttr("src")
+                                            $("#showimg").addClass("imgtaghide");
+                                            $("#showimg").removeClass("imgtagshow");
+                                            $('.hideonimage').show();
+                                        }
+                                    });
+                                });
+                            });
+        </script>
+<?php } } ?>

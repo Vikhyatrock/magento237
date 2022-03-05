@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+ <!-- 
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mageants_InstagramIntegration::instagram_menu" title="Instagram Integration" module="Mageants_InstagramIntegration" sortOrder="51" dependsOnModule="Mageants_InstagramIntegration" resource="Mageants_InstagramIntegration::instagram_menu" />
+
+        <add id="Mageants_InstagramIntegration::new_image" title="New Image" module="Mageants_InstagramIntegration" sortOrder="10" action="instagramintegrationadmin/newimage/newimage" resource="Mageants_InstagramIntegration::new_image" parent="Mageants_InstagramIntegration::instagram_menu"/>
+
+        <add id="Mageants_InstagramIntegration::approved_image" title="Approved Image" module="Mageants_InstagramIntegration" sortOrder="10" action="instagramintegrationadmin/approvedimages/approvedimages" resource="Mageants_InstagramIntegration::approved_image" parent="Mageants_InstagramIntegration::instagram_menu"/>
+
+        <add id="Mageants_InstagramIntegration::approved_image_manage" title="Approved Image Manager" module="Mageants_InstagramIntegration" sortOrder="10" action="instagramintegrationadmin/imagemanager/imagemanager" resource="Mageants_InstagramIntegration::approved_image_manage" parent="Mageants_InstagramIntegration::instagram_menu"/>
+
+        <add id="Mageants_InstagramIntegration::insta_configuration" title="Configuration" module="Mageants_InstagramIntegration" sortOrder="99" parent="Mageants_InstagramIntegration::instagram_menu" action="adminhtml/system_config/edit/section/instagramintegration" resource="Mageants_InstagramIntegration::config_instagramintegration"/>
+    </menu>
+</config>

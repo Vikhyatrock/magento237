@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category Mageants PreOrder
+ * @package Mageants_PreOrder
+ * @copyright Copyright (c) 2018  Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageants" translate="label" sortOrder="0">
+            <label>Mageants</label>
+        </tab>
+        <section id="mageants_preorder" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Pre-Order</label>
+            <tab>mageants</tab>
+            <resource>Mageants_PreOrder::mageants_preorder</resource>
+            <group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Pre Orders</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="change_status" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change Status for mixed Order</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When an Order contains both regular and pre-order items,"Pre-Order" added to the status name(Pending Pre-Order).</comment>
+                </field>
+                <field id="allowe_outofproduct_for_preorder" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Out-Of-Stock product for Pre-Order</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When product with "Pre-Order" status becomes out-of-stock(when its Quantity goes below zero),It will be sold as pre-order.</comment>
+                </field>
+                <field id="restrict_order" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Restrict mixing Pre-Order and Regular Product in Cart </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group> 
+            <group id="display_options" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Display Options</label>
+                 <field id="add_to_cart_button_text" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add to Cart Button Text</label>
+                </field>
+                <field id="default_message_for_preorder" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Message for Pre-order Products</label>
+                </field> 
+                <field id="note_for_preorder_incart" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Note for Pre-order Products in Cart/Order</label>
+                </field> 
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <store_credit>
+			<general>
+				<enable>1</enable>
+				<refund_auto>1</refund_auto>
+				<apply_on_tax>1</apply_on_tax>
+				<apply_on_shipping>1</apply_on_shipping>
+			</general>
+			<email_notification>
+				<email_enable>0</email_enable>
+				<email_actions>admin_add_from_balance,admin_remove_from_balance,order_refund,order_place,order_cancelation</email_actions>
+				<credit_send_email>general</credit_send_email>
+				<customer_notification_template>store_credit_email_notification_customer_notification_template</customer_notification_template>
+			</email_notification>
+        </store_credit>
+    </default>
+</config>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants DeleteAccount
+ * @package Mageants_DeleteAccount
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+ 	<menu>
+ 		<add id="Mageants_Deleteaccount::deleteaccount" 
+ 			 title="Customer Account Delete History"  
+ 			 module="Mageants_Deleteaccount" 
+ 			 parent="Magento_Customer::customer" 
+ 			 sortOrder="10" 
+ 			 action="deleteaccount/backend/index" 
+ 			 resource="Mageants_Deleteaccount::deleteaccount"
+ 		/>
+ 	</menu>
+</config>

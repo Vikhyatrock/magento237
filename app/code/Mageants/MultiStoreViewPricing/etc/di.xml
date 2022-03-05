@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Model\Config\Source\Price\Scope" type="Mageants\MultiStoreViewPricing\Model\Config\Source\Price\Scope" /> 
+    <preference for="Magento\Directory\Block\Adminhtml\Frontend\Currency\Base" type="Mageants\MultiStoreViewPricing\Block\Adminhtml\Frontend\Currency\Base" /> 
+    <type name="Magento\Catalog\Model\Product">
+    	<plugin name="change_price" type="Mageants\MultiStoreViewPricing\Plugin\Price" />
+    </type>
+   <type name="Magento\ImportExport\Controller\Adminhtml\Import\Download">
+	    <plugin name="sample_file_download" type="Mageants\MultiStoreViewPricing\Plugin\Download" sortOrder="1" />
+	</type>
+	<preference for="Magento\Catalog\Pricing\Price\TierPrice" type="Mageants\MultiStoreViewPricing\Pricing\Price\TierPrice" /> 
+	 <preference for="Magento\Catalog\Ui\Component\Listing\Columns\Price" type="Mageants\MultiStoreViewPricing\Ui\Component\Listing\Columns\Column\Price" /> 
+</config>

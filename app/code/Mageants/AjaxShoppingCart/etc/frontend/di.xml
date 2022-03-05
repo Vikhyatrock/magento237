@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Quote\Model\Quote" type="Mageants\AjaxShoppingCart\Model\Quote" />
+    
+    <type name="Magento\Quote\Model\Cart\CartTotalRepository">
+        <plugin name="multishipping_shipping_addresses" disabled="true" />
+    </type>
+    <type name="Magento\Quote\Model\Cart\CartTotalRepository">
+        <plugin name="new_multishipping_shipping_addresses" type="Mageants\AjaxShoppingCart\Model\CartTotalRepositoryPlugin" sortOrder="1" />
+    </type>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="checkout_ajaxcart_block" xsi:type="object">Mageants\AjaxShoppingCart\Model\AjaxConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="customsection" xsi:type="string">Mageants\AjaxShoppingCart\CustomerData\CustomSection</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

@@ -1,0 +1,12 @@
+<?php
+/**
+ * @category Mageants MultiStoreViewPricing
+ * @package Mageants_MultiStoreViewPricing
+ * @copyright Copyright (c) 2017 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+\Magento\Framework\Component\ComponentRegistrar::register(
+    \Magento\Framework\Component\ComponentRegistrar::MODULE,
+    'Mageants_MultiStoreViewPricing',
+    __DIR__
+);

@@ -1,0 +1,23 @@
+<?php
+/**
+ * @category Mageants ZipcodeCod
+ * @package Mageants_ZipcodeCod
+ * @copyright Copyright (c) 2017 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+?>
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+        
+        jQuery('#collect_export_button').click(function(){
+           window.location.href='<?= /* @noEscape */ $block->getAjaxUrl() ?>';
+        });        
+
+    });
+</script>
+
+<?= $block->getButtonHtml() ?>
+

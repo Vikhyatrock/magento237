@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants DeleteAccount
+ * @package Mageants_DeleteAccount
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+        <observer name="customer_register_success_observer" instance="Mageants\Deleteaccount\Observer\CustomerRegister" />
+    </event>
+</config>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category Mageants PreOrder
+ * @package Mageants_PreOrder
+ * @copyright Copyright (c) 2018  Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
+    <module name="Mageants_PreOrder" setup_version="2.0.3" active="true">
+    	 <sequence>
+            <module name="Magento_Catalog"/>
+            <module name="Magento_Bundle"/>
+            <module name="Magento_CatalogSearch"/>
+        </sequence>
+    </module>
+</config>

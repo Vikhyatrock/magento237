@@ -1,0 +1,235 @@
+<?php
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+$instadata = $block->getInstagramCollection()->getData();
+$instadatadefault = $block->getInstagramCollectionDefault()->getData();
+$imgNum = 1;
+$instaLogoUrl = $block->getInstagramLogoFile();
+?>
+<div class="inta-feed">
+    <h2>
+<?php if ($block->getInstagramFeedTitle()) {
+    /* @noEscape */ echo $block->getInstagramFeedTitle();
+} else {
+    /* @noEscape */ echo $block->getInstagramFeedTitleDefault();
+} ?>
+    </h2>
+</div>
+<div class="instagram-view clearer">
+    <h1>Instagramlistphtml</h1>
+    <?php if (is_array($instadata) || $instadata instanceof Countable) { ?>
+        <?php foreach ($instadata as $data) : ?>
+            <div id="insta-image" onmouseover="showinstadesc(<?=/* @noEscape */ $data['id']; ?>);"
+                    onmouseout="hideinstadesc(<?= /* @noEscape */ $data['id']; ?>);">
+                <span>
+                    <!-- <img src="<?php /* @noEscape */ //$data['insta_media_medium'];?>" -->
+                    <!-- preg_replace('/vp.*\/.{32}\/.{8}\//', '', $data['insta_media_medium']) -->
+                    <img src="<?= /* @noEscape */ preg_replace('/vp.*\/.{32}\/.{8}\//', '', $data['insta_media_medium']); ?>"
+                    alt="" title="" onmouseover="showinstadesc(<?=/* @noEscape */ $data['id']; ?>);"
+                    onmouseout="hideinstadesc(<?= /* @noEscape */ $data['id']; ?>);">
+                </span>
+                <?php if ($instaLogoUrl != null) { ?>
+                    <div class="hoverp" id="phover<?= /* @noEscape */ $data['id']; ?>" onclick="javascript:showpopupaction('<?= /* @noEscape */ $data['id']; ?>',<?= /* @noEscape */ $imgNum; ?>);">
+                    <img id="Imghover<?= /* @noEscape */ $data['id']; ?>" src="<?php echo $instaLogoUrl; ?>" 
+                         style="height: 16%;width: 16%;opacity: 0.5;margin: 42% 42%;position: absolute;" /> 
+                    </div>
+                <?php } else { ?>
+                    <div class="hoverp" id="phover<?= /* @noEscape */ $data['id']; ?>"
+                    onmouseover="showinstadesc(<?= /* @noEscape */ $data['id']; ?>);"
+                    onmouseout="hideinstadesc(<?= /* @noEscape */ $data['id']; ?>);"
+                    onclick="javascript:showpopupaction('<?= /* @noEscape */
+                    $data['id']; ?>',<?= /* @noEscape */ $imgNum; ?>);">
+                    </div>
+                <?php } ?>
+                <input type="hidden" name="curimageid<?= /* @noEscape */ $imgNum; ?>"
+                id="curimageid<?= /* @noEscape */ $imgNum; ?>"
+                value="<?= /* @noEscape */ $data['id']; ?>">
+            </div>
+            <?php $imgNum++; ?>
+        <?php endforeach; ?>
+    <?php }
+if (is_array($instadatadefault) || $instadatadefault instanceof Countable) { ?>
+        <?php foreach ($instadatadefault as $data) : ?>
+            <div id="insta-image" onmouseover="showinstadesc(<?=/* @noEscape */ $data['id']; ?>);"
+                    onmouseout="hideinstadesc(<?= /* @noEscape */ $data['id']; ?>);">
+                <span>
+                    <img src="<?= /* @noEscape */ $data['insta_media_medium'];?>"
+                    alt="" title="" >
+                </span>
+                <?php if ($instaLogoUrl != null) { ?>
+                    <div class="hoverp" id="phover<?= /* @noEscape */ $data['id']; ?>" onclick="javascript:showpopupaction('<?= /* @noEscape */
+                    $data['id']; ?>',<?= /* @noEscape */ $imgNum; ?>);" >
+                    <img id="Imghover<?= /* @noEscape */ $data['id']; ?>" src="<?php echo $instaLogoUrl; ?>" 
+                         style="height: 16%;width: 16%;opacity: 0.5;margin: 42% 42%;position: absolute;" />
+                	</div>
+                <?php } else { ?>
+                    <div class="hoverp" id="phover<?= /* @noEscape */ $data['id']; ?>"
+                    onmouseover="showinstadesc(<?= /* @noEscape */ $data['id']; ?>);"
+                    onmouseout="hideinstadesc(<?= /* @noEscape */ $data['id']; ?>);"
+                    onclick="javascript:showpopupaction('<?= /* @noEscape */
+                    $data['id']; ?>',<?= /* @noEscape */ $imgNum; ?>);">
+                    </div>
+                <?php } ?>
+                <input type="hidden" name="curimageid<?= /* @noEscape */ $imgNum; ?>"
+                id="curimageid<?= /* @noEscape */ $imgNum; ?>"
+                value="<?= /* @noEscape */ $data['id']; ?>">
+            </div>
+            <?php $imgNum++; ?>
+        <?php endforeach; ?>
+<?php } ?>
+</div>
+<input type="hidden" name="curimage" id="curimage" value="">
+<div id="insta-popup">
+    <div id="popup-main">
+        <div id="popup-loader"></div>
+        <div id="popup-content"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    
+    require(['jquery', 'jquery/ui'], function($){ 
+
+        jQuery(document).keydown(function(event) { 
+
+            if (event.keyCode == 39) { 
+                $( "#nextbtn" ).trigger("click");
+            }
+            if (event.keyCode == 37) { 
+                $( "#prevbtn" ).trigger("click");
+            }
+
+            });
+    });
+
+    function showinstadesc(Id)
+    {
+        jQuery("#phover"+Id).addClass('instagramshow');
+    }
+
+    function hideinstadesc(Id)
+    {
+        jQuery("#phover"+Id).removeClass('instagramshow');
+    }
+
+    function stopScrolling (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+
+    function closepopup()
+    {
+        jQuery('body').off('scroll mousewheel touchmove', stopScrolling);
+        jQuery('#popup-main').css('display','none');
+        jQuery('#popup-loader').css('display','none');
+        jQuery('#popup-content').css('display','none'); 
+    }
+
+    function showpopupaction(ImgId,ImgNum)
+    {
+        var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                buttons: []
+        };      
+        var customurl = "<?= /* @noEscape */ $block->getUrl('instagramintegration/gallery/instapopup'); ?>";
+        jQuery('#curimage').val(ImgNum);
+        jQuery.ajax({
+            type: "POST",
+            url: customurl,
+            showLoader: true,
+            dataType:'json',
+            data: {Id: ImgId},
+            complete: function(transport) 
+            {
+                var response = transport || "no response text";
+                jQuery('#popup-main').css('display','block');
+                jQuery("#popup-main").html(response.responseJSON).modal(options).modal('openModal');
+                jQuery('.alltitleul > li').hover(function (e){
+                    var classname = jQuery(this).attr('class');
+                    var xy = classname.split('-');
+                    jQuery('#titletext').html(jQuery(this).find('div').html());
+                    jQuery('#titletext').css('top',xy[0]+'px');
+                    jQuery('#titletext').css('left',xy[1]+'px');
+                });
+                
+                jQuery('.alltitleul > li').mouseleave(function (e){
+                    jQuery('#titletext').html('');
+                });
+                slideIndex = 1;
+                showDivs(slideIndex);
+                //jQuery("#popup-main").html(response.responseJSON);
+
+                /*var popup = modal(options, jQuery('#popup-main'));
+                jQuery('#popup-main').modal('openModal');*/
+            },
+            error: function() 
+            {
+                alert('Something went wrong...'); 
+            }
+        });
+    }
+
+    function prevnextpopup(Acn)
+    {
+        //Acn 1=Prev 2=Next
+        var curimg = parseInt(jQuery('#curimage').val());
+        if(Acn == 1)// Prev
+        {
+            curimg = curimg - 1;
+            if(curimg <= 0)
+            {
+                curimg = <?= $imgNum-1; ?>;
+            }
+            
+        } else // Next
+        {
+            curimg = curimg + 1;
+            if(curimg > <?= $imgNum-1; ?>)
+            {
+                curimg = 1; 
+            }
+        }
+
+        var ImgId = jQuery('#curimageid'+curimg).val();
+
+        showpopupaction(ImgId,curimg);
+    }
+
+    var slideIndex = 1;
+
+    function plusDivs(n) 
+    {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) 
+    {
+        var i;
+        var x = document.getElementsByClassName("instaSlides");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length} ;
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+
+        if (x.length > 0) 
+        {
+            x[slideIndex-1].style.display = "block";
+        }
+
+        if(slideIndex==1)
+        {
+            jQuery("#titletext").show();
+        }
+        else
+        {
+            jQuery("#titletext").hide();
+        }
+    }
+</script>

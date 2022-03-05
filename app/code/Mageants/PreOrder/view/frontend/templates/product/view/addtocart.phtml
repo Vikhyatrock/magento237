@@ -1,0 +1,66 @@
+<?php
+/**
+ * @category Mageants PreOrder
+ * @package Mageants_PreOrder
+ * @copyright Copyright (c) 2018  Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+?>
+<?php
+$blockObj= $block->getLayout()->createBlock('Mageants\PreOrder\Block\Preorder');
+$blockObj->getACTIVE();
+$buttontext = $blockObj->getCartButtonText();
+$_product = $block->getProduct();
+$preorderstock = $blockObj->getProductStockStatus();
+$backorderstatus = $preorderstock->getBackorders();
+
+if ($blockObj->getACTIVE() == 1) {
+    if ($backorderstatus == 4) {
+        $buttonTitle = __($buttontext);
+    } else {
+        $buttonTitle = __('Add to Cart');
+    }
+} else {
+    $buttonTitle = __('Add to Cart');
+}
+?>
+<input type="hidden" class="simpleproductid" name="simpleproductid" id="simpleproductid" value="">
+  <?php if ($_product->isSaleable()): ?>
+  <div class="box-tocart">
+      <div class="fieldset">
+          <?php if ($block->shouldRenderQuantity()): ?>
+          <div class="field qty">
+              <label class="label" for="qty"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></label>
+              <div class="control">
+                  <input type="number"
+                         name="qty"
+                         id="qty"
+                         value="<?= /* @escapeNotVerified */ $block->getProductDefaultQty() * 1 ?>"
+                         title="<?= /* @escapeNotVerified */ __('Qty') ?>"
+                         class="input-text qty"
+                         data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                         />
+              </div>
+          </div>
+          <?php endif; ?>
+          <div class="actions">
+              <button type="submit"
+                      title="<?= /* @escapeNotVerified */ $buttonTitle ?>"
+                      class="action primary tocart"
+                      id="product-addtocart-button">
+                  <span><?= /* @escapeNotVerified */ $buttonTitle ?></span>
+              </button>
+              <?= $block->getChildHtml('', true) ?>
+          </div>
+      </div>
+  </div>
+  <?php endif; ?>
+
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+        <referenceContainer name="product.info.form.content" >
+            <block class="Mageants\ExtraFee\Block\ProductFee" name="product.view.extraFee" template="Mageants_ExtraFee::product/view/fee.phtml" before='-' cacheable="false" ifconfig="mageants_extrafee/setting/enable"
+			></block>
+        </referenceContainer>
+        <!-- <referenceBlock name="product.info.options.wrapper.bottom" >
+            <block class="Mageants\ExtraFee\Block\ProductFee" name="product.view.extraFee.custom" template="Mageants_ExtraFee::product/view/fee.phtml" before='product.info.addtocart.additional' cacheable="false" ifconfig="mageants_extrafee/setting/enable"
+			></block>
+        </referenceBlock> -->
+    </body>
+</page>

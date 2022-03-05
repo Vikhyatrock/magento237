@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants Productimage
+ * @package Mageants_Productimage
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <head>
+        <css src="Mageants_Productimage::css/jquery.fancybox.css"/>
+        <css src="Mageants_Productimage::css/custom.css"/>
+        <css src="Mageants_Productimage::css/owl.carousel.min.css"/>
+        <css src="Mageants_Productimage::css/owl.theme.default.min.css"/>
+    </head>
+    <body>
+        <referenceBlock name="product.info.details">
+            <block  
+                class="Mageants\Productimage\Block\Productimage"    name="productimage.tab" 
+                    template="Mageants_Productimage::extra_tab.phtml" group="detailed_info" ifconfig="productimage/general/enable" after="reviews.tab">
+            <arguments>
+            <argument  name="title" xsi:type="helper" helper="Mageants\Productimage\Helper\Data::tabTitle">
+            </argument>
+            </arguments>        
+            </block>
+        </referenceBlock>
+    </body>
+</page>

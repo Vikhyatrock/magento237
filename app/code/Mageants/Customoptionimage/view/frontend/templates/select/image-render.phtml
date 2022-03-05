@@ -1,0 +1,139 @@
+<?php
+$productId = $block->getProduct()->getId();
+$option = $block->getOption();
+$moduleConfig = $block->getConfigHelper();
+$dropdownViewType = $moduleConfig->getDropdownView();
+$multipleViewType = $moduleConfig->getMultipleSelectView();
+$radiobuttonViewType = $moduleConfig->getRadiobuttonView();
+$checkboxViewType = $moduleConfig->getCheckboxView();
+?>
+    <?php if ($moduleConfig->isModuleEnable()) : ?>
+        <?php if ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_DROP_DOWN) : ?>
+            <?php if ($dropdownViewType == 0) : ?>
+                <div class="Mageants_image_preview" id="Mageants_image_preview_<?php echo $option->getId() ?>">
+                    <img alt="" id="image_preview_<?php echo $option->getId() ?>"/>
+                </div>
+            <?php elseif ($dropdownViewType == 1) : ?>
+                <div class="Mageants_image_preview" id="Mageants_image_preview_<?php echo $option->getId() ?>">
+                    <?php foreach ($option->getValues() as $value) : ?>
+                        <?php if ($value->getData('image_url')) : ?>
+                            <img alt=""
+                            id="image_preview_<?php echo $value->getOptionTypeId() ?>"
+                            src="<?php echo $value->getData('image_url') ?>"
+                            title="<?php echo $value->getTitle() ?>" />
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+                {
+                    "#mageants_options_<?php echo $option->getId() ?>": {
+                        "mageants_preview_dropdown": {
+                            "imageHeight": "<?php echo $moduleConfig->getImageY($option->getType()) ?>",
+                            "imageWidth": "<?php echo $moduleConfig->getImageX($option->getType()) ?>",
+                            "viewType": <?php echo $dropdownViewType ?>,
+                            "imageUrls": <?php echo $block->getImageList(); ?>
+                        }
+                    }
+                }
+            </script>
+        <?php elseif ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_MULTIPLE) :?>
+            <?php if ($multipleViewType == 0) : ?>
+                <div class="Mageants_image_multiselect" id="Mageants_image_multiselect_<?php echo $option->getId() ?>">
+                </div>
+            <?php elseif ($multipleViewType == 1) : ?>
+                <div class="Mageants_image_multiselect" id="Mageants_image_multiselect_<?php echo $option->getId() ?>">
+                    <?php foreach ($option->getValues() as $value) : ?>
+                        <?php if ($value->getData('image_url')) : ?>
+                            <img alt=""
+                            id="image_preview_<?php echo $value->getOptionTypeId() ?>"
+                            src="<?php echo $value->getData('image_url'); ?>"
+                            title="<?php echo $value->getTitle() ?>" />
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+                {
+                    "#mageants_options_<?php echo $option->getId() ?>": {
+                        "mageants_preview_multiple": {
+                            "imageHeight": "<?php echo $moduleConfig->getImageY($option->getType()) ?>",
+                            "imageWidth": "<?php echo $moduleConfig->getImageX($option->getType()) ?>",
+                            "viewType": <?php echo $multipleViewType ?>,
+                            "imageUrls": <?php echo $block->getImageList(); ?>
+                        }
+                    }
+                }
+            </script>
+            <?php //Radio button... 
+            elseif ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_RADIO) :?>
+            <?php if ($radiobuttonViewType == 0) : ?>
+                <div class="Mageants_image_radio" id="Mageants_image_radio_<?php echo $option->getId() ?>">
+                </div>
+            <?php elseif ($radiobuttonViewType == 1) : ?>
+                <div class="Mageants_image_radio" id="Mageants_image_radio_<?php echo $option->getId() ?>">
+                    <?php foreach ($option->getValues() as $value) : ?>
+                        <?php if ($value->getData('image_url')) : ?>
+                            <img alt=""
+                            id="image_preview_<?php echo $value->getOptionTypeId() ?>"
+                            src="<?php echo $value->getData('image_url'); ?>"
+                            title="<?php echo $value->getTitle() ?>" />
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+                {
+                    "#mageants_options_<?php echo $option->getId() ?>": {
+                        "mageants_preview_radio": {
+                            "imageHeight": "<?php echo $moduleConfig->getImageY($option->getType()) ?>",
+                            "imageWidth": "<?php echo $moduleConfig->getImageX($option->getType()) ?>",
+                            "viewType": <?php echo $radiobuttonViewType ?>,
+                            "imageUrls": <?php echo $block->getImageList(); ?>
+                        }
+                    }
+                }
+            </script>
+            <?php //Checkbox button... 
+            elseif ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_CHECKBOX) :?>
+            <?php if ($checkboxViewType == 0) : ?>
+                <div class="Mageants_image_checkbox" id="Mageants_image_checkbox_<?php echo $option->getId() ?>">
+                </div>
+            <?php elseif ($checkboxViewType == 1) : ?>
+                <div class="Mageants_image_checkbox" id="Mageants_image_checkbox_<?php echo $option->getId() ?>">
+                    <?php foreach ($option->getValues() as $value) : ?>
+                        <?php if ($value->getData('image_url')) : ?>
+                            <img alt=""
+                            id="image_preview_<?php echo $value->getOptionTypeId() ?>"
+                            src="<?php echo $value->getData('image_url'); ?>"
+                            title="<?php echo $value->getTitle() ?>" />
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+                {
+                    "#mageants_options_<?php echo $option->getId() ?>": {
+                        "mageants_preview_checkbox": {
+                            "imageHeight": "<?php echo $moduleConfig->getImageY($option->getType()) ?>",
+                            "imageWidth": "<?php echo $moduleConfig->getImageX($option->getType()) ?>",
+                            "viewType": <?php echo $checkboxViewType ?>,
+                            "imageUrls": <?php echo $block->getImageList(); ?>
+                        }
+                    }
+                }
+            </script>
+        <?php else : ?>            
+            <script type="text/x-magento-init">
+                {
+                    "#mageants_options_<?php echo $option->getId() ?>": {
+                        "mageants_preview_static_select": {
+                            "imageHeight": "<?php echo $moduleConfig->getImageY($option->getType()) ?>",
+                            "imageWidth": "<?php echo $moduleConfig->getImageX($option->getType()) ?>",
+                            "imageUrls": <?php echo $block->getImageList(); ?>
+                        }
+                    }
+                }
+            </script>
+        <?php endif; ?>
+    <?php endif;?> 

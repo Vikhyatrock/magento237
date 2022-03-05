@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+ <!-- 
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageants" translate="label" sortOrder="450">
+            <label>mageants</label>
+        </tab>
+        <section id="instagramintegration" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Instagram Integration</label>
+            <tab>mageants</tab>
+            <resource>Mageants_InstagramIntegration::config_instagramintegration</resource>
+            <group id="instagram_integration" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Instagram Integration Setting</label>
+                <field id="enable_frontend" translate="label comment" type="select" sortOrder="1"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Instagram Integration Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                
+                <field id="instagram_feed_title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Instagram Feed Title</label>
+                    <comment><![CDATA[Enter Heading of Instagram Feed]]></comment>
+                </field>
+                
+                <field id="instagram_file_upload" translate="label" 
+                        type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Instagram Custom Logo File</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
+                    <upload_dir config="system" scope_info="1">Instagram_Image</upload_dir>
+                    <comment><![CDATA[Upload File to Show Logo on Front-end on Hover Effect]]></comment>
+                </field>
+
+                <field id="product_link_title" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Link Heading</label>
+                    <comment><![CDATA[Enter Heading of Product link to show on popup]]></comment>
+                </field>
+
+                <field id="insta_caption_title" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Instagram Caption Heading</label>
+                    <comment><![CDATA[Enter Heading of Instagram Caption to show on popup]]></comment>
+                </field>
+
+                <field id="showon_homepage" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Images on Home Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Put Code on CMS Home Page : {{block class="Mageants\InstagramIntegration\Block\Homepage" template="Mageants_InstagramIntegration::instagram/homepage.phtml"}} to show images]]></comment>
+                </field>
+
+                <field id="noofimage_homepage" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>No. of Images to show on Home Page</label>
+                    <validate>validate-digits</validate>
+                    <comment><![CDATA[Enter number of images to show on home page, leave blank or empty for unlimited images.]]></comment>
+                </field>
+
+                <field id="showon_productpage" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Images on Product Pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="noofimage_productpage" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>No. of Images to show on Product Page</label>
+                    <validate>validate-digits</validate>
+                    <comment><![CDATA[Enter number of images to show on product pages, leave blank or empty for unlimited images.]]></comment>
+                    <depends>
+                        <field id="showon_productpage">1</field>
+                    </depends>
+                </field>
+
+                <!-- <field id="instagram_clientid" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Instagram Client ID</label>
+                    <comment><![CDATA[<strong>Register Here : https://instagram.com/developer</strong>
+Enter Your Instagram client ID given by Instagram App while registration]]></comment>
+                </field> -->
+
+                <field id="instagram_accesstoken" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Instagram Access Token</label>
+                    <validate>required-entry</validate>
+                </field>
+
+                <!-- <field id="updateimageby" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Update Images By</label>
+                    <source_model>Mageants\InstagramIntegration\Model\System\Config\Source\Updateimagesby</source_model>
+                </field> -->
+
+                <!-- <field id="update_by_user" translate="label" type="textarea" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1" can_be_empty="1">
+                    <label>Users</label>
+                    <depends>
+                        <field id="updateimageby">user</field>
+                    </depends>
+                </field> -->
+
+                <!-- <field id="update_name" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hashtag</label>
+                    <depends>
+                        <field id="updateimageby">hashtag</field>
+                    </depends>
+                    <comment><![CDATA[Special characters and space not allow. Only Underscore allow.]]></comment>
+                </field> -->
+
+                <!-- <field id="noofimage_fetch" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>No. of Images to Fetch</label>
+                    <validate>validate-digits</validate>
+                    <comment><![CDATA[Enter number of images to fetch, leave blank or empty for max 100 images.]]></comment>
+                </field> -->
+
+                <!-- <field id="shownavigation_popup" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Navigation in Image Popup</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enabling will allow navigation between images in popup.]]></comment>
+                </field> -->
+
+                <field id="showpopup" translate="label" type="select" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Popup With</label>
+                    <source_model>Mageants\InstagramIntegration\Model\System\Config\Source\Showpopup</source_model>
+                </field>
+
+                <field id="noofshow_instagrampage" translate="label comment" type="text" sortOrder="18"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>No. of Images to Show on Instagram Page</label>
+                    <validate>validate-digits</validate>
+                    <comment><![CDATA[Enter number of images to show on Instagram page, leave blank or empty for unlimited images.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,43 @@
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+     <fieldset name="qtylimit">
+       <argument name="data" xsi:type="array">
+           <item name="config" xsi:type="array">
+               <item name="label" xsi:type="string" translate="true">Limit Quantity For Grouped Products</item>
+               <item name="collapsible" xsi:type="boolean">true</item>
+               <item name="sortOrder" xsi:type="number">200</item>
+           </item>
+       </argument>
+       <container name="fieldname_container" >
+           <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                   <item name="sortOrder" xsi:type="number">160</item>
+               </item>
+           </argument>
+           <field name="min_qty">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true">Minimum Quantity</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">minimummaximumquantity</item>
+                        <item name="dataScope" xsi:type="string">min_qty</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="max_qty">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true">Maximum Quantity</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">minimummaximumquantity</item>
+                        <item name="dataScope" xsi:type="string">max_qty</item>
+                    </item>
+                </argument>
+            </field>
+           <!-- <htmlContent name="html_content_demo">
+               <argument name="block" xsi:type="object">Namespace\Modulename\Block\Adminhtml\Catalog\Product\Edit\Tab\Demo</argument>
+           </htmlContent> -->
+       </container>
+   </fieldset>
+</form>

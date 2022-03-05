@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mageants_zipcodecod>
+        	<general>
+                <enable>1</enable>
+                <estimated_delivery_msg>Estimated Delivery Time: %s</estimated_delivery_msg>
+                <cod_available_msg>Cash On Delivery is available in %s</cod_available_msg>
+                <cod_unavailable_msg>Cash On Delivery is not available in your area!</cod_unavailable_msg>
+            </general>
+        </mageants_zipcodecod>
+        <payment>
+            <cashondelivery>
+                <active>1</active>
+            </cashondelivery>
+        </payment>
+    </default>
+</config>

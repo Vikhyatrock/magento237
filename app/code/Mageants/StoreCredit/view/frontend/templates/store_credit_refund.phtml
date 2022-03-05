@@ -1,0 +1,67 @@
+<?php
+/**
+ * @category Mageants StoreCredit
+ * @package Mageants_StoreCredit
+ * @copyright Copyright (c) 2020 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data');
+?>
+<?php if ($block->getStockcreditdata()): ?>
+
+<div class="block block-addresses-list">
+    <h3><b>Store Credit Balance:<?= $priceHelper->currency($block->getStockcreditbalance(), true, false) ?></b></h3>
+    <div class="block-content">
+        <?php if ($_stockcreditdata = $block->getStockcreditdata()): ?>
+
+            <div class="table-wrapper">
+                <table class="data table" id="store-credit-table">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="id"><?= $block->escapeHtml(__('Transaction Id')) ?></th>
+                        <th scope="col" class="created_at"><?= $block->escapeHtml(__('Date')) ?></th>
+                        <th scope="col" class="balance_change"><?= $block->escapeHtml(__('Change')) ?></th>
+                        <th scope="col" class="new_balance"><?= $block->escapeHtml(__('New Balance')) ?></th>
+                        <th scope="col" class="action"><?= $block->escapeHtml(__('Action')) ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($_stockcreditdata as $stockcreditdata): ?>
+                        <tr>
+                            <td data-th="<?= $block->escapeHtmlAttr(__('Transaction Id')) ?>" class="id"><?= $stockcreditdata['id'] ?></td>
+                            <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="created_at"><?= $block->Stockcreditdateformat($stockcreditdata['created_at']) ?></td>
+                            <?php if ($stockcreditdata['add_balance'] == '1'): ?>
+                                <td data-th="<?= $block->escapeHtmlAttr(__('Change')) ?>" class="balance_change" style="color: #0a820b;"><?= '+'.$priceHelper->currency($stockcreditdata['balance_change'], true, false) ?></td>
+                            <?php else: ?>
+                                <td data-th="<?= $block->escapeHtmlAttr(__('Change')) ?>" class="balance_change" style="color: #b71c1c;"><?= $priceHelper->currency($stockcreditdata['balance_change'], true, false) ?></td>
+                            <?php endif; ?>
+                            <td data-th="<?= $block->escapeHtmlAttr(__('New Balance')) ?>" class="new_balance"><?= $priceHelper->currency($stockcreditdata['new_balance'], true, false) ?></td>
+                            <td data-th="<?= $block->escapeHtmlAttr(__('Action')) ?>" class="action">
+                                <?php
+                                if ($stockcreditdata['action'] == '0' || $stockcreditdata['action'] == '1') {
+                                    echo 'Changed By Admin';
+                                } elseif ($stockcreditdata['action'] == '2') {
+                                    echo 'Refunded '.$block->StockcreditorderincrementID($stockcreditdata['order_id']);
+                                } elseif ($stockcreditdata['action'] == '3') {
+                                    echo 'Order Paid '.$block->StockcreditorderincrementID($stockcreditdata['order_id']);
+                                } elseif ($stockcreditdata['action'] == '4') {
+                                    echo 'Order Canceled '.$block->StockcreditorderincrementID($stockcreditdata['order_id']);
+                                }
+                                ?>
+                                <?= '</br><b>'.$stockcreditdata['comment'].'</b>' ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <?php endif; ?>
+        </div>
+</div>
+<?php else: ?>
+<div class="block block-addresses-list">
+    <h3><b>Store Credit Balance : <?= $priceHelper->currency(0, true, false) ?></b></h3>
+    <p class="alert-warning alert">You have no store credit history.</p>
+</div>
+<?php endif; ?>

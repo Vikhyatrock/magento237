@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants Productimage
+ * @package Mageants_Productimage
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mageants_Productimage::add_row" title="Customer Product Image Management" module="Mageants_Productimage" sortOrder="1" parent="Magento_Backend::marketing" action="productimage/grid/index" resource="Mageants_Productimage::add_row"/>
+    </menu>
+</config>

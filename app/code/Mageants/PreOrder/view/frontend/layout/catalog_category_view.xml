@@ -1,0 +1,16 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="category.products.list">
+            <action method="setTemplate" ifconfig="mageants_preorder/general/active">
+                <argument name="template" xsi:type="string">Mageants_PreOrder::product/list.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="category.product.type.details.renderers">
+	        <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Mageants_PreOrder::product/listing/renderer.phtml" >
+	            <arguments>
+	                <argument name="type" xsi:type="string">category-custom</argument>
+	            </arguments>
+	        </block>
+	    </referenceBlock>
+    </body>
+</page>

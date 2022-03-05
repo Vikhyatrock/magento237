@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants DeleteAccount
+ * @package Mageants_DeleteAccount
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="2columns-left">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+         <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-delete" ifconfig="deleteaccount/general/enable" after="-">
+            <arguments>
+               <argument name="path" xsi:type="string">deleteaccount/index/index</argument>
+               <argument name="label" xsi:type="string" translate="true">Delete Account</argument>
+            </arguments>
+         </block>
+      </referenceBlock>
+    </body>
+</page>

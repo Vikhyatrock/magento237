@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <quantityselect>
+            <general>
+                <enable>1</enable>
+                <display_min_quantity>You need to purchase a combination of minimum {min_quantity} quantity(s) of child products of the {grouped_ product_name}.</display_min_quantity>
+                <display_max_quantity>You can only purchase a combination of maximum {max_quantity} quantity(s) of child products of the {grouped_ product_name}.</display_max_quantity>
+            </general>
+        </quantityselect>
+    </default>
+</config>

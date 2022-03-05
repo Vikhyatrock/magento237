@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd"> 
+<update handle="customer_account"/> 
+	<body> 
+		<referenceBlock name="page.main.title"> 
+			<action method="setPageTitle"> 
+				<argument translate="true" name="title" xsi:type="string">Store Credit</argument> 
+			</action> 
+		</referenceBlock> 
+		<referenceContainer name="content"> 
+			<block class="Mageants\StoreCredit\Block\Account\Tab\View" name="my_tab" template="Mageants_StoreCredit::store_credit_refund.phtml" cacheable="false" ifconfig="store_credit/general/enable"> 
+			</block> 
+		</referenceContainer> 
+	</body> 
+</page>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="mageants" translate="label" sortOrder="0">
+			<label>Mageants</label>
+		</tab>
+		<section id="mageants_zipcodecod" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Zipcode COD</label>
+            <tab>mageants</tab>
+            <resource>Mageants_ZipcodeCod::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="import" translate="label comment" type="button" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Mageants\ZipcodeCod\Block\Adminhtml\System\Config\Import</frontend_model>
+                    <label>Import CSV</label>
+                    <comment>Importing data takes some time so wait untill proccess is over</comment>
+                </field>               
+                <field id="export" translate="label comment" type="button" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Mageants\ZipcodeCod\Block\Adminhtml\System\Config\Export</frontend_model>
+                    <label>Export CSV</label>
+                    <comment>Exporting data takes some time so wait untill proccess is over</comment>
+                </field>
+                <field id="estimated_delivery_msg" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Estimated Delivery Message</label>
+					<comment>The %s will be replaced with Estimated Delivery Time</comment>
+                </field>
+                <field id="cod_available_msg" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>COD Availability Message</label>
+					<comment>The %s will be replaced with City</comment>
+                </field>
+                <field id="cod_unavailable_msg" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>COD Unavailability Message</label>
+                </field>
+            </group>
+		</section>
+	</system>
+</config>

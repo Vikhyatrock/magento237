@@ -1,0 +1,66 @@
+<?php
+/**
+ * @category Mageants PreOrder
+ * @package Mageants_PreOrder
+ * @copyright Copyright (c) 2018  Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+
+?>
+<?php /* @var $block \Magento\Catalog\Block\Product\View\AbstractView */?>
+<?php $_product = $block->getProduct();
+$blockObj= $block->getLayout()->createBlock('Mageants\PreOrder\Block\Preorder');
+$blockObj->getACTIVE();
+$preorderstock = $blockObj->getProductStockStatus();
+$backorderstatus = $preorderstock->getBackorders();
+?>
+
+<?php
+    $preorderitemstatus = 0;
+if ($blockObj->getACTIVE()) {
+    if ($preorderstock->getBackorders() == 4) {
+        if ($preorderstock->getBackstockPreorders() == 1) {
+            $preorderitemstatus++;
+        } elseif ($preorderstock->getBackstockPreorders() == 0) {
+            if ($blockObj->getAlloweOutofproduct()) {
+                $preorderitemstatus++;
+            }
+        } elseif ($preorderstock->getBackstockPreorders() == 2) {
+            if ($preorderstock->getIsInStock() == 1) {
+                $preorderitemstatus++;
+            }
+        }
+    }
+}
+?>
+<?php if ($block->displayProductStockStatus()): ?>
+    <?php if ($_product->isAvailable()) { ?>
+        <?php
+        if ($preorderitemstatus > 0) { ?>
+                <div class="stock available" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
+                    <span><?= /* @escapeNotVerified */ __('Pre Order') ?></span>
+                </div>
+            <?php } elseif ($preorderstock->getBackorders() == 4) { ?>
+                <div class="stock unavailable" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
+                    <span><?= /* @escapeNotVerified */ __('Pre Order') ?></span>
+                </div>
+            <?php } else { ?>
+                <div class="stock available" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
+                    <span><?= /* @escapeNotVerified */ __('In stock') ?></span>
+                </div> <?php } ?>   
+    <?php } else {
+        if ($preorderitemstatus > 0) { ?>
+               <div class="stock available" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
+                    <span><?= /* @escapeNotVerified */ __('Pre Order') ?></span>
+                </div>
+            <?php } elseif ($preorderstock->getBackorders() == 4 && $blockObj->getAlloweOutofproduct() == 1) { ?>
+                <div class="stock unavailable" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
+                    <span><?= /* @escapeNotVerified */ __('Pre Order') ?></span>
+                </div>
+            <?php } else { ?>
+                <div class="stock unavailable" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
+                    <span><?= /* @escapeNotVerified */ __('Out of stock') ?></span>
+                </div>
+            <?php } ?>
+    <?php } ?>
+<?php endif; ?>

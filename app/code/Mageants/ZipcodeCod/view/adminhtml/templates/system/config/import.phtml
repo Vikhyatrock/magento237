@@ -1,0 +1,56 @@
+<?php
+/**
+ * @category Mageants ZipcodeCod
+ * @package Mageants_ZipcodeCod
+ * @copyright Copyright (c) 2017 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+?>
+<script type="text/javascript">
+require(['jquery','prototype'], function($){
+    $(document).ready(function(){
+        $("#collect_import_button").click(function(){
+            var url=$("#ajaxurl").val();
+
+            var data = new FormData($("#config-edit-form")[0]);
+
+            $.ajax({
+                showLoader: true,
+                url: url,
+                data: data,
+                processData: false,
+                contentType: false,
+                type: "POST",
+                dataType: 'json'
+            }).done(function (data) {
+                if(data!=""){
+                    $("#message").css("display","block");
+                    $("#message").html("");
+                    $("#message").html(data.message);
+                    // $("#html").html("");
+                    // location.reload(true);
+                }
+                else{
+                    
+                }
+            });
+        });
+    });
+});
+</script>
+
+
+
+<div style="display:none;" class="message" id="message"></div>
+
+<input type="hidden" name="ajaxurl" id="ajaxurl" value="<?= /* @noEscape */ $block->getAjaxUrl(); ?>" />
+<input type="file" name="import_block" id="import_block"/>
+<?= /* @noEscape */ $block->getButtonHtml() ?>
+</div>
+<span class="collect-indicator" id="collect_span">
+    <img class="processing" hidden="hidden" alt="Collecting" 
+        style="margin:0 5px" src="<?= /* @noEscape */ $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+    <img class="collected" hidden="hidden" alt="Collected" 
+        style="margin:-3px 5px" src="<?= /* @noEscape */ $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+    <span id="collect_message_span"></span>
+</span>

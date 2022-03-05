@@ -1,0 +1,29 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<div class="removeIsCODAvail">
+    <div role="alert" class="messages">
+        <div class="message-notice notice message" data-ui-id="message-notice">
+            <div>COD is not available on your pincode, you can place order by making payment online via Credit/Debit Card/Netbanking</div>
+        </div>
+    </div>
+</div>
+<div if="isPaymentMethodsAvailable()"
+     class="items payment-methods">
+    <div repeat="foreach: paymentGroupsList, item: '$group'"
+         class="payment-group">
+        <div if="getRegion($group().displayArea)().length"
+             translate="getGroupTitle($group)"
+             class="step-title"
+             data-role="title">
+        </div>
+        <each args="data: getRegion($group().displayArea), as: 'method'" render=""/>
+    </div>
+</div>
+<div ifnot="isPaymentMethodsAvailable()"
+     class="no-payments-block"
+     translate="'No Payment Methods'">
+</div>

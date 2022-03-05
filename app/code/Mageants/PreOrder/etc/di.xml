@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category Mageants PreOrder
+ * @package Mageants_PreOrder
+ * @copyright Copyright (c) 2018  Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+<preference for="Magento\CatalogInventory\Model\Source\Backorders" type="Mageants\PreOrder\Model\Source\Backorders" />
+
+<preference for="Magento\CatalogInventory\Model\StockStateProvider" type="Mageants\PreOrder\Model\CatalogInventory\StockStateProvider" />
+
+<preference for="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator" type="Mageants\PreOrder\Model\Quote\Item\QuantityValidator" />
+
+<preference for="Magento\InventorySales\Model\IsProductSalableForRequestedQtyCondition\IsAnySourceItemInStockCondition" type="Mageants\PreOrder\Model\IsProductSalableForRequestedQtyCondition\IsAnySourceItemInStockCondition" />
+
+ <preference for="Magento\CatalogInventory\Observer\QuantityValidatorObserver" type="Mageants\PreOrder\Observer\QuantityValidatorObserver" />
+
+<preference for="\Magento\Catalog\Model\Product" type="Mageants\PreOrder\Model\Catalog\Product" />
+
+<preference for="Magento\Swatches\Block\Product\Renderer\Configurable" type="Mageants\PreOrder\Block\Product\View\Type\Configurable" />
+
+<type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+    <plugin name="unique_name" type="Mageants\PreOrder\Plugin\ToOrderItem" sortOrder="1" />
+</type>
+ 
+<type name="Magento\Checkout\Model\Cart">
+    <plugin name="interceptAddingProductToCart" type="Mageants\PreOrder\Plugin\PreventAddToCart" sortOrder="1" />
+</type>
+
+</config>

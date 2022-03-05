@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"> 
+	<body>
+        <referenceBlock name="product.info.options.wrapper">
+            <referenceBlock name="product.info.options" remove="true"/>
+            <block class="Magento\Catalog\Block\Product\View\Options" name="mageants.product.info.options" as="mageants_product_options" template="Magento_Catalog::product/view/options.phtml" before="html_calendar">
+                <block class="Magento\Catalog\Block\Product\View\Options\Type\DefaultType" as="default" template="Magento_Catalog::product/view/options/type/default.phtml"/>
+                <block class="Mageants\Customoptionimage\Block\Options\Type\Text" as="text"/>
+                <block class="Mageants\Customoptionimage\Block\Options\Type\File" as="file"/>
+                <block class="Mageants\Customoptionimage\Block\Options\Type\Select" as="select"/>
+                <block class="Mageants\Customoptionimage\Block\Options\Type\Date" as="date"/>
+            </block>
+        </referenceBlock>
+	</body>
+</page>

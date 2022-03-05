@@ -1,0 +1,52 @@
+<div class="payment-option _collapsible opc-payment-additional discount-code"
+     data-bind="mageInit: {'collapsible':{'openedState': '_active'}}">
+    <!-- ko if: isDisplayed() -->
+    <div class="payment-option-title field choice" data-role="title">
+        <span class="action action-toggle" id="block-discount-heading" role="heading" aria-level="2">
+         <!-- ko i18n: 'Apply Store Credit'--><!-- /ko -->
+        </span>
+    </div>
+    <div class="payment-option-content" data-role="content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="storeCreditLeft" data-role="title">
+            <span>You have </span>
+            <span data-bind="text: getStoreCreditLeft()"></span>
+            <span> on your Store Credit account</span>
+        </div>
+        <form class="form" id="my-form" method="post">
+            <div class="payment-option-inner" style="width: 50%;float: left;" data-bind="visible: checknotavailable()">
+                <div class="field">
+                    <div class="control">
+                            <input class="input-text"
+                               type="text"
+                               id="store_credit_amount"
+                               name="my_input"
+                               data-bind="attr:{placeholder: $t('Enter store credit amount')}"
+                               data-validate="{required:true,'validate-number-range':true,'validate-number':true}"
+                                />
+                    </div>
+                </div>
+            </div>
+            <div class="storeCreditapplied" data-role="title"  data-bind="visible: checkavailable()">
+                <span>Applied store credit amount is </span>
+                <span data-bind="text: getappliedamount()"></span>
+            </div>
+            <div class="actions-toolbar" style="float: left;">
+                <div class="primary" data-bind="visible: checknotavailable()">
+                    <button class="action action-apply" type="submit" data-bind="'value': $t('Apply'), click: apply">
+                        <span>Apply Store Credit</span>
+                    </button>
+                </div>
+                <div class="primary" data-bind="visible: checkavailable()">
+                    <button class="action action-cancel" type="submit" data-bind="'value': $t('Cancel'), click: cancel">
+                        <span>Cancel Store Credit</span>
+                    </button>
+                </div>
+            </div>
+            <div id="message" style="clear: both;"></div>
+        </form>
+    </div>
+    <!-- /ko -->
+</div>

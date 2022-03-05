@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants Productimage
+ * @package Mageants_Productimage
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageants" translate="label" sortOrder="10">
+            <label>Mageants</label>
+        </tab>
+        <section id="productimage" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Product Image By Customer</label>
+            <tab>mageants</tab>
+            <resource>Mageants_Productimage::config_productimage</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configurations</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allowguest" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Guest To Upload Images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="emailrequired" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Required</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="frontendtabtitle" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Title</label>
+                </field>
+                <field id="editortextarea" translate="label comment" sortOrder="1" type="editor" showInStore="1" showInWebsite="1" showInDefault="1" >
+                    <label>Tab Discription</label>
+                    <frontend_model>Mageants\Productimage\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+            </group>
+             <group id="display" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Display Settings</label>
+                <field id="navoptions" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Slideshow Speed</label>
+                    <source_model>Mageants\Productimage\Model\Config\Source\ButtonOptions</source_model>   
+                    <comment>
+                     Display Types of Buttons (Navigation or Dots) on the Gallery
+                    </comment>
+                </field>
+                <field id="slidespeed" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Slideshow Speed</label>
+                    <comment>   
+                    Transition duration (in seconds) between two continuous slides
+                    </comment>
+                </field>
+                <field id="imageonslide" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of Images per Silder</label>
+                    <comment>The maximum size is 8</comment>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-0-8</validate>
+                </field>
+                <field id="imageuploadlimit" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Limit Number of Uploaded Images at Once</label>
+                </field>
+                <field id="himagedimenstion" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Horizontal Image Dimension (in Slider)</label>
+                    <comment>The maximum size allowed is 200px</comment>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-0-200</validate>
+                </field>
+                <field id="vimagedimenstion" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Vertical Image Dimension (in Slider)</label>
+                    <comment>The maximum size allowed is 200px</comment>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-0-200</validate>
+                </field>
+                <field id="himagezoom" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Horizontal Image Dimension (Zoom Image)</label>
+                </field>
+                <field id="vimagezoom" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Vertical Image Dimension (Zoom Image)</label>
+                </field>
+            </group> 
+            <group id="email" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email Notification</label>
+                <field id="emailenable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Email Notification to Admin</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="identity" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="emailreceiver" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Receiver</label>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="emailtemplate" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="approve_email_template" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Approve Email Template</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="reject_email_template" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reject Email Template</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

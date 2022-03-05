@@ -1,0 +1,27 @@
+<?php
+/**
+ * @category Mageants StoreCredit
+ * @package Mageants_StoreCredit
+ * @copyright Copyright (c) 2020 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+?>
+ 
+<div class="fieldset-wrapper customer-information">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?= /* @escapeNotVerified */ __('Store Credit') ?></span>
+    </div>
+    <table class="admin__table-secondary">
+        <tbody>
+        <?= $block->getChildHtml(); ?>
+        <tr>
+            <th><?= /* @escapeNotVerified */ __('Customer ID:') ?></th>
+            <td><?= $block->getCustomerId(); ?></td>
+        </tr>
+        <tr>
+            <th><?= /* @escapeNotVerified */ __('Customer History:') ?></th>
+            <td><?= __('History of Customer display') ?></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

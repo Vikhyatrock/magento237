@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants DeleteAccount
+ * @package Mageants_DeleteAccount
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Mageants\Deleteaccount\Api\Data\GridInterface" type="Mageants\Deleteaccount\Model\Deleteaccount" />
+ 
+    <virtualType name="Mageants\Deleteaccount\Model\ResourceModel\Deleteaccount\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageants_deleteaccount</argument>
+            <argument name="resourceModel" xsi:type="string">Mageants\Deleteaccount\Model\ResourceModel\Deleteaccount</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="grid_record_data_source" xsi:type="string">Mageants\Deleteaccount\Model\ResourceModel\Deleteaccount\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

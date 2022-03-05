@@ -1,0 +1,448 @@
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+.block.related .product-item-info.related-available{
+  z-index: 0;
+  position: relative;
+}
+.instagram-view div {
+  float:left;
+  margin:10px;
+}
+.inta-feed h2{
+  text-align: center;
+}
+#popup-leftbar .fa.fa-arrow-circle-left {
+  color: #fff;
+  font-size: 30px;
+  left: 10px;
+  position: absolute;
+  top: 48%;
+  cursor:pointer;
+}
+#popup-leftbar > video {
+  width: 100%;
+}
+
+#popup-leftbar .fa.fa-arrow-circle-right {
+  color: #fff;
+  font-size: 30px;
+  right: 10px;
+  position: absolute;
+  top: 48%;
+  cursor:pointer;
+}
+
+.instagram-view.clearer {
+  float: left;
+  width: 100%;
+}
+
+.instagram-view #insta-image {
+  float: left;
+  margin: 0 2% 15px 0;
+  overflow: hidden;
+  position: relative;
+  width: 23.3%;
+  border: 1px solid #c1c1c1;
+}
+.instagram-view #insta-image span{
+    text-decoration: none;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    align-items: center;
+    width: 100%;
+    height: 288px;
+}
+.catalog-product-view .instagram-view #insta-image span{
+  height: 273px;
+}
+.instagram-view #insta-image img {
+    height: auto;
+    width: 100%;
+}
+
+.instagram-view #insta-image:nth-child(4n) {
+  margin-right: 0;
+}
+
+.instagram-view #insta-image .hoverp {
+  background: rgba(0, 0, 0, 0.6) none repeat scroll 0 0;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.instagram-view #insta-image .hoverp #innerdiv {
+  cursor: pointer;
+  display: inline-block;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+}
+
+.instagram-view #insta-image .hoverp #innerdiv > span {
+  font-size: 20px;
+  margin-top: 85%;
+}
+.instagram-view #insta-image .hoverp #innerdiv > #instacomments {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.instagram-view #insta-image .hoverp #innerdiv > #instalikes {
+  margin-right: 10px;
+}
+
+.instagram-view #insta-image .hoverp #innerdiv > #instalikes > .fa.fa-heart,
+.instagram-view #insta-image .hoverp #innerdiv > #instacomments > .fa.fa-comment { margin-right:5px; }
+
+.instagram-view #insta-image .hoverp a { 
+  text-decoration:none; 
+  color:#fff !important; 
+  font-family:"Open Sans",sans-serif !important; 
+  font-size:15px;   
+  height: 100%; width:100%;
+    overflow: hidden;
+    text-decoration: none; 
+  display:inline-block; text-align:center;
+}
+
+.instagramshow { display:block !important; }
+
+#popup-main #popup-content #popup-leftbar
+{
+  display: table-cell;
+  float: left;
+  height: 100%;
+  position: relative;
+  text-align: center;
+  width: 550px;
+}
+
+@media only screen and (max-width: 992px) and (min-width: 768px)  {
+  #popup-main #popup-content #popup-leftbar {
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 767px)  {
+  #popup-main #popup-content #popup-leftbar {
+    width: 100%;
+    margin: 0 0 15px;
+  }
+}
+
+#popup-main #popup-content #popup-leftbar img {
+    background-color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+  width:100%;
+  height:100%;
+}
+
+#popup-main #popup-content #popup-leftbar > span {
+  position: absolute;
+}
+
+#popup-main #popup-content #popup-leftbar #titletext {
+  border-radius: 6px;
+  transition: all 1s ease 0s;
+}
+
+#popup-main #popup-content #popup-leftbar #titletext > a{text-decoration:none;color:#fff}
+#popup-main #popup-content #popup-leftbar #titletext > a:hover{text-decoration:none;color:#fff}
+
+#popup-main #popup-content #popup-leftbar #titletext > a > .number
+{ 
+  background: rgba(0, 0, 0, 0) url("../images/hotspot.png") no-repeat scroll 0 0 / 30px 33px;
+  float: left;
+  height: 33px;
+  text-align: center;
+  width: 30px;
+  left: -16px;
+  position: absolute;
+  top: 0;
+}
+
+#popup-main #popup-content #popup-leftbar #titletext > a > .numbertitle
+{
+   background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
+   border: 1px solid;
+   float: left;
+   padding: 4px 10px;
+}
+
+#popup-main #popup-content #popup-leftbar p.image-title {
+    font-size: 22px;
+    text-transform: capitalize;
+}
+
+#popup-main #popup-content #popup-leftbar p.image-title a:hover{
+    text-decoration:none;
+}
+
+#popup-main #popup-content #popup-rightbar {
+  display: table-cell;
+  float: left;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+  padding: 0 0 0 10px;
+  max-width: calc(100% - 560px);
+}
+
+@media only screen and (max-width: 992px) and (min-width: 768px)  {
+  #popup-main #popup-content #popup-rightbar {
+    max-width: calc(100% - (62%-10px));
+  }
+}
+@media only screen and (max-width: 767px)  {
+  #popup-main #popup-content #popup-rightbar {
+      max-width: 100%
+  }
+}
+
+#popup-main #popup-content #popup-rightbar .main-user-div {
+  border-bottom: 1px solid #000;
+  height: auto;
+  width: 100%;
+}
+
+#popup-main #popup-content #popup-rightbar > .main-user-div > .user {
+  margin: 0 auto;
+  padding: 0 0 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.productlinktitle {
+  font-style: italic;
+  font-family: Times New Roman,serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  text-align: left;
+  padding: 0 20px;
+  margin: 15px 0 15px;
+  display: block;
+}
+
+.productlinktitle h3 {
+  margin: 0 0;
+}
+
+#popup-main #popup-content #popup-rightbar > .main-user-div > .user > .userimage {
+    display: inline-table;
+    vertical-align: middle;
+}
+
+#popup-main #popup-content #popup-rightbar > .main-user-div > .user > .userimage > img {
+    border: 1px solid;
+    border-radius: 50px;
+    height: 34px;
+    padding: 2px;
+    width: 34px;
+}
+
+#popup-main #popup-content #popup-rightbar > .main-user-div > .user .userlink {
+  display: inline-table;
+  font-size: 20px;
+  line-height: 40px;
+  margin-left: 10px;
+  vertical-align: middle;
+  height:40px;
+}
+
+#popup-main #popup-content #popup-rightbar ul {
+  border-bottom: 1px solid #000;
+  clear: both;
+  padding: 0 0;
+  margin: 0 0 15px;
+}
+
+#popup-main #popup-content #popup-rightbar ul li 
+{
+  clear: both;
+  cursor: pointer;
+  display: inline-table;
+  font-family: open sans;
+  font-size: 14px;
+  margin: 0 0 5px;
+  padding: 10px 15px;
+  text-align: left;
+  transition: all 1s ease 0s;
+  width: calc(100% - 30px);
+  border: 1px solid transparent;
+}
+
+#popup-main #popup-content #popup-rightbar ul li:hover 
+{ 
+  background: rgba(255, 255, 255, 0.74) none repeat scroll 0 0;
+  border: 1px solid #e2e2e2;
+  box-shadow: 2px 5px 7px 0 rgba(0, 0, 0, 0.23); 
+}
+
+#popup-main #popup-content #popup-rightbar ul li a:hover { text-decoration:none; }
+
+#popup-main #popup-content #popup-rightbar ul li a span {
+  color: #000000 !important;
+  font-weight: 500;
+  vertical-align: middle;
+}
+#popup-main #popup-content #popup-rightbar ul.prditem li a.prdblocka {
+  text-align: center;
+  display: inline-block;
+}
+#popup-main #popup-content #popup-rightbar ul.prditem li a.prdblocka span {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+#popup-main #popup-content #popup-rightbar ul li:hover a span 
+{ 
+  background-color: transparent !important;
+    color: #67c6ed !important; 
+}
+
+#popup-main #popup-content #popup-rightbar ul li a span.number {
+    color:#fff !important;
+  height:20px;
+  width:20px;
+  display:inline-block;
+  background-color: #222;
+    border-radius: 50%;
+  text-align:center;
+  display:none;
+}
+
+#popup-main #popup-content #popup-rightbar #instatitle
+{
+  color: #222;
+  font-style: italic;
+  font-family: Times New Roman,serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  text-align: left;
+  font-size: 17px;
+  margin: 0 0 0;
+  padding: 5px 15px;
+}
+#popup-main #popup-content #popup-rightbar #instatitle h3 {
+  margin: 0 0 10px;
+}
+#popup-main #popup-content #popup-rightbar #instatitle p,
+#popup-main #popup-content #popup-rightbar #instatitle strong,
+#popup-main #popup-content #popup-rightbar #instatitle span,
+#popup-main #popup-content #popup-rightbar #instatitle em, 
+#popup-main #popup-content #popup-rightbar #instatitle label
+{
+  color:#222 !important; 
+  font-family: Times New Roman,serif !important; 
+  font-size:17px; 
+}
+
+#popup-main #popup-loader {
+  background: rgba(0, 0, 0, 0) url("../images/balls.svg") no-repeat scroll 0 0 / 63px 63px;
+  display: none;
+  height: 63px;
+  margin-left:48%;
+  margin-top: 15%;
+  width: 63px;
+}
+
+#popup-main #popup-content #closebtn {
+  background: rgba(0, 0, 0, 0) url("../images/close.png") no-repeat scroll 0 0 / 25px 25px;
+  cursor: pointer;
+  height: 25px;
+  position: absolute;
+  right: -12px;
+  top: -16px;
+  width: 25px;
+  z-index:9999;
+}
+
+#popup-main #popup-content #prevbtn {
+  background: rgba(0, 0, 0, 0) url("../images/instaprev.png") no-repeat scroll 0 0;
+  cursor: pointer;
+  float: left;
+  height: 50px;
+  left: -51px;
+  position: absolute;
+  top: 47%;
+  width: 50px;
+}
+
+#popup-main #popup-content #nextbtn
+{
+  height:50px;
+  width:50px;
+  float:left;
+  background:url("../images/instanext.png") scroll 0 0 no-repeat;
+  cursor:pointer; 
+  right: -60px;
+    position: absolute;
+    top: 47%; 
+}
+@media only screen and (max-width: 767px) {
+  #popup-main #popup-content #prevbtn, #popup-main #popup-content #nextbtn {
+    display: none;
+  }
+
+}
+
+#popup-main #popup-content #popup-rightbar ul.prditem li div{
+  display:none;
+}
+
+#popup-main #popup-content #popup-rightbar #cntbtndiv #userdatadiv
+{
+  float:left;
+  margin-left:15%;
+}
+
+#popup-main #popup-content #popup-rightbar #cntbtndiv #userdatadiv > img 
+{
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    height: 36px;
+    width: 36px;
+  float:left;
+}
+
+#popup-main #popup-content #popup-rightbar #cntbtndiv #userdatadiv > a 
+{
+   margin-left:10px;
+   font-size:23px;
+}
+
+#popup-main #popup-content #popup-rightbar #cntbtndiv #userdatadiv > a:hover 
+{
+   text-decoration:none;
+}
+
+#popup-main #popup-content #popup-rightbar ul.prditem li {
+  border: 1px solid #e2e2e2;
+  display: inline-table;
+  height: 142px;
+  margin-bottom: 15px;
+  margin-right: 2%;
+  margin-top:0;
+  padding:0;
+  width: 30% !important;
+}

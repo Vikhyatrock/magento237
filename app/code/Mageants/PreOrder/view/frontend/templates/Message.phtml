@@ -1,0 +1,61 @@
+<?php
+$buttontext = $block->getCartButtonText();
+$preorderstock = $block->getProductStockStatus();
+$pre_order_message = "";
+if ($preorderstock->getPreorderNote() !="") {
+    $pre_order_message = $preorderstock->getPreorderNote();
+} else {
+    $pre_order_message = $block->getDefaultMessageForPreorder();
+}
+$preorderstock->getBackorders();
+$displaymsg = 0;
+$url = $block->getUrl('preorder/index/index');
+if ($block->getACTIVE()) {
+    if ($preorderstock->getBackorders() == 4) {
+        if ($preorderstock->getBackstockPreorders() == 1) {
+            $displaymsg = 1;
+        } elseif ($preorderstock->getBackstockPreorders() == 0) {
+            if ($block->getAlloweOutofproduct() == 0 && $preorderstock->getIsInStock() == 1) {
+                $displaymsg = 1;
+            }
+            if ($block->getAlloweOutofproduct() == 1) {
+                $displaymsg = 1;
+            }
+        } elseif ($preorderstock->getBackstockPreorders() == 2) {
+            if ($preorderstock->getIsInStock() == 1) {
+                $displaymsg = 1;
+            }
+        }
+        if ($displaymsg == 1) {?>
+            <div class="preorder_note">
+                <div class="preorder_info"><?php echo $pre_order_message ?></div>
+                <?php if ($preorderstock->getPreorderAvailabilityDate() != "") { ?>
+                    <div class="preorder_date">
+                        <span>Available On :: </span>
+                        <?php echo $preorderstock->getPreorderAvailabilityDate(); ?>
+                    </div> 
+                <?php } ?>
+            </div>
+            
+        <?php }
+    }
+
+    ?>
+<div class="preorder_note"></div>
+<input type="hidden" name="url" value="<?php echo $url ?>" id="url">
+<input type="hidden" name="buttontext" id="buttontext" value="<?php echo $buttontext; ?>">
+<?php if ($preorderstock->getBackorders() == 4 && $block->getAlloweOutofproduct() != 0) { ?>
+        <script type="text/javascript">
+            require(['jquery','preorder'],function($){
+                console.log("asdf456");
+                $('.product-info-stock-sku .stock span').html("Pre Order");
+            });
+        </script> 
+        <?php } ?>
+<script type="text/javascript">
+    require(['jquery','preorder'],function($){
+    });
+</script>
+    <?php
+}
+

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @category Mageants FreeShippingBar
+ * @package Mageants_FreeShippingBar
+ * @copyright Copyright (c) 2019 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+ 	<menu>
+ 		<add id="Mageants_FreeShippingBar::add_row" 
+ 			 title="Free Shipping Bar" 
+ 			 translate="title" 
+ 			 module="Mageants_FreeShippingBar" 
+ 			 parent="Magento_Backend::marketing" 
+ 			 sortOrder="0" 
+ 			 dependsOnModule="Mageants_FreeShippingBar" 
+ 			 resource="Mageants_FreeShippingBar::add_row"
+ 		/>
+ 		<add id="Mageants_FreeShippingBar::freeshippingbar" 
+ 			 title="Free Shipping Bar Management" 
+ 			 translate="title" 
+ 			 module="Mageants_FreeShippingBar" 
+ 			 parent="Mageants_FreeShippingBar::add_row" 
+ 			 sortOrder="10" 
+ 			 dependsOnModule="Mageants_FreeShippingBar" 
+ 			 action="freeshippingbar/backend/index" 
+ 			 resource="Mageants_FreeShippingBar::freeshippingbar"
+ 		/>
+ 	</menu>
+</config>

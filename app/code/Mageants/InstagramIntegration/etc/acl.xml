@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Mageants_InstagramIntegration::instagram_menu" title="Instagram Integration" sortOrder="10" >
+                    <resource id="Mageants_InstagramIntegration::new_image" title="New Image" sortOrder="0" />
+                    <resource id="Mageants_InstagramIntegration::approved_image" title="Approved Image" sortOrder="0" />
+                    <resource id="Mageants_InstagramIntegration::approved_image_manage" title="Approved Image Manager" sortOrder="0" />
+                    <resource id="Mageants_InstagramIntegration::insta_configuration" title="Configration" sortOrder="100" />
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Mageants_InstagramIntegration::config_instagramintegration" title="Mageants InstagramIntegration"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

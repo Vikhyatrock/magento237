@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="save_storecreditamount_to_order" instance="Mageants\StoreCredit\Observer\SaveStorecreditAmountToOrder"/>
+    </event>
+	<event name="order_cancel_after">
+        <observer name="adminhtml_order_cancel_after_viv_observer" instance="Mageants\StoreCredit\Observer\AfterOrderCancelObserver" />
+    </event>
+	<event name="sales_order_invoice_register">
+        <observer name="salesrep_sales_order_invoice_register" instance="Mageants\StoreCredit\Observer\BeforeInvoiceObserver"/>
+    </event>
+</config>

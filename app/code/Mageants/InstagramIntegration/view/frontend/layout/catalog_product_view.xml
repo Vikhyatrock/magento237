@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category Mageants InstagramIntegration
+ * @package Mageants_InstagramIntegration
+ * @copyright Copyright (c) 2018 Mageants
+ * @author Mageants Team <support@mageants.com>
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.details">
+            <block ifconfig="instagramintegration/instagram_integration/showon_productpage" class="Mageants\InstagramIntegration\Block\Productpage" name="instagram_list_tab" template="Mageants_InstagramIntegration::productpage.phtml" group="detailed_info" after='product.info.description'>
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Instagram</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

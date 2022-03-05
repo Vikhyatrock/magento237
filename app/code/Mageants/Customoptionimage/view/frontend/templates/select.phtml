@@ -1,0 +1,22 @@
+<?php
+$productId = $block->getProduct()->getId();
+$option = $block->getOption();
+$class = ($option->getIsRequire()) ? ' required' : '';
+?>
+<div id="mageants_options_<?php echo $option->getId() ?>" class="field<?php  echo $class; ?>">
+    <label class="label" for="select_<?php echo $option->getId() ?>">
+        <span><?php echo  $block->escapeHtml($option->getTitle()) ?></span>
+        <?php  echo $block->getMageantsCustomOptionBlock('after_title'); ?>
+    </label> 
+    <?php echo $block->getMageantsCustomOptionBlock('before_control'); ?>
+    <div class="control">
+        <?php echo $block->getValuesHtml() ?>
+        <?php if ($option->getIsRequire()): ?>
+            <?php if ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_RADIO
+                || $option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_CHECKBOX): ?>
+                <span id="options-<?php  echo $option->getId() ?>-container"></span>
+            <?php endif; ?>
+        <?php endif;?>
+    </div>
+    <?php  echo $block->getMageantsCustomOptionBlock('after_control'); ?>
+</div>
